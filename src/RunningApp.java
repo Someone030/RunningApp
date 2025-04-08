@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/** ALL OF THIS IS COPY AND PASTED FOR REFERENCE
 
 /**
  * The RunApp class is the main entry point for the application.
@@ -33,7 +34,7 @@ import java.util.logging.SimpleFormatter;
    *
    * @param args Command line arguments (unused).
    */
-/** ALL OF THIS IS COPY AND PASTED FOR REFERENCE
+/** 
    public static void main(String[] args) {
     try (AutoclosableLoggerFileHandler logFileHandler =
         new AutoclosableLoggerFileHandler(LOG_FILE, false)) {
