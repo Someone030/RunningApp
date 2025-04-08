@@ -1,1 +1,3 @@
+**Don’t forget to reference the correct path of the JDBC driver or copy the driver to the lib directory.*
 
+(look in lib folder of MovieApp example, copy it to this repo)
