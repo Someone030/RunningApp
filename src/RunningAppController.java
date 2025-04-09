@@ -99,15 +99,11 @@ public class RunningAppController {
   private static void printTotalDistanceRanOnDay(Connection connection, String accoID) throws SQLException {
     System.out.print("Enter the date (YYYY-MM-DD) to get total distance: ");
     String date = in.next();
+    
     // Get the list of distances ran by the user on that specific day
     List<Double> totalDistances = RunningAppDataModel.getTotalDistanceRanOnDay(connection, accoID, date);
-    // Sum the total distance
-    double totalDistance = 0;
-    for (Double distance : totalDistances) {
-        totalDistance += distance;
-    }
     
     // Display the total distance
-    RunningAppView.displayTotalDistance(totalDistance);
+    RunningAppView.displayDistanceRoutes(totalDistances); // Pass the list of distances
   }
 }
