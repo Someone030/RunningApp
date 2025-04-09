@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 /**
  * Represents a route with a start location, end location, route ID, acc ID, location, and
  * distance preference.
@@ -9,6 +12,7 @@ public class Routes{
     private String accID;
     private String location;
     private String distancePreference;
+    private Double distance;
 
 /**
  * Constructs a new Routes instance with the specified details.
