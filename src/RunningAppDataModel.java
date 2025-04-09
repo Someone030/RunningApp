@@ -169,7 +169,7 @@ public class RunningAppDataModel {
      * @return true if the achievements was successfully created, false otherwise.
      */
   public boolean createAchievements(Achievements achievements) {
-    String query = "INSERT INTO Achievements (username, achievements_name, date_earned) VALUES (?, ?, ?)";
+    String query = "INSERT INTO Achievements (username, achievements_name) VALUES (?, ?)";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, achievements.getUsername());
       stmt.setString(2, achievements.getAchievementsName());
