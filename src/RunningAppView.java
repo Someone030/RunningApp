@@ -74,6 +74,10 @@ public class RunningAppView {
   public static void displayDistanceRoutes(List<Double> distances) { //Sammi & Marcus
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-22s %-9s\n", "Total Distance", "Total");
+    double totalDistance = 0;
+    for (Double distance : distances) {
+        totalDistance += distance;
+    }
     System.out.printf("%-22s %-9.2f\n", "Distance Ran:", totalDistance);
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
