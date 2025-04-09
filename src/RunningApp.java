@@ -14,7 +14,7 @@ import java.util.logging.SimpleFormatter;
  * It sets up logging, establishes a database connection, and starts the controller loop.
  */
 
-public class RunApp {
+public class RunningApp {
   private static final String LOG_FILE = "RunApp.log";
   private static final Logger logger = Logger.getLogger(RunApp.class.getName());
 
