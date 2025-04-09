@@ -82,7 +82,7 @@ public class RunningAppController {
     System.out.print("Enter the location where the routes start: ");
     String location = in.next();
     //get routes that start at the specified location
-    List<Route> routes = RunningAppDataModel.getRoutesStartingAtLocation(connection, location);
+    List<Routes> routes = RunningAppDataModel.getRoutesStartingAtLocation(connection, location);
     RunningAppView.displayStartingRoutes(routes);  // Display the routes that start at the location
   }
 
