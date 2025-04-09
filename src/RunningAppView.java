@@ -16,10 +16,10 @@ public class RunningAppView {
 
   public static String getMenuText() {
     return "1. [Easy: Sammi Liu, Marcus Robertson] List all routes\n"
-        + "2. [Easy: Alan perez, Ashley Pupkin] List the friends of a user\n"
+        + "2. [Easy: Sammi Liu, Marcus Robertson] List the friends of a user\n"
         + "3. [Hard: Sammi Liu, Marcus Robertson] List the routes that end at location x\n"
-        + "4. [Hard: Alan Perez, Ashley Pupkin] List routes starting at location y\n"
-        + "5. [Hard: Alan Perez, Ashley Pupkin] Print the total distance ran on a certain day\n"
+        + "4. [Hard: Sammi Liu, Marcus Robertson] List routes starting at location y\n"
+        + "5. [Hard: Sammi Liu, Marcus Robertson] Print the total distance ran on a certain day\n"
         + "6. [Hardest: Sammi Liu, Marcus Robertson] Order the liked routes from shortest to longest\n"
         + "0. Exit\n" + "Enter your choice: ";
   }
@@ -100,12 +100,16 @@ public class RunningAppView {
    * @param friends the list of friends to display
    */
   
-  public static void displayFriends(List<Friend> friends) { //Sammi & Marcus
+  public static void displayFriends(Account account) { //Sammi & Marcus
+    String[] friendsArray = account.getFriends().split(",");
+    
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-    System.out.printf("%-20s %-20s\n", "Username", "Nickname");
-    for (Friend friend : friends) {
-      System.out.printf("%-20s %-20s\n", friend.getUsername(), friend.getNickname());
+    System.out.printf("%-20s\n", "Friend Name");
+    
+    for (String friendName : friendsArray) {
+        System.out.printf("%-20s\n", friendName);
     }
+    
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
 
