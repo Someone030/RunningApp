@@ -37,4 +37,16 @@ public class Account {
     public String getAccountID() {return accountID;}
 
     public String getFriends() {return friends;}
+
+    public List<String> getFriendList() {
+        List<String> friendList = new ArrayList<>();
+        if (friends != null && !friends.isEmpty()) {
+            String[] friendArray = friends.split(",");
+            for (String friend : friendArray) {
+                friendList.add(friend.trim());
+            }
+        }
+        return friendList;
+    }
+
 }
