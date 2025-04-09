@@ -64,7 +64,7 @@ public class MovieView {
  }
 
  /**
- * Displays a list of routes with a specific ending location.
+ * Displays a list of routes ordered from shortest length to greatest.
  *
  * @param routes the list of routes to display
  */
