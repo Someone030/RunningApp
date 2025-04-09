@@ -1,3 +1,4 @@
+import java.sql.Timestamp;
 /**
  * Represents a saved route with a start location, end location, route ID, saved route ID,
  * account ID, and saved date.
@@ -8,7 +9,7 @@ public class SavedRoutes {
     private String routesID;
     private String savedRouteID;
     private String accoID;
-    private String savedAt;
+    private Timestamp savedAt;
 
 /**
  * Constructs a new SavedRoutes instance with the specified details.
@@ -22,7 +23,7 @@ public class SavedRoutes {
  */
 
  public SavedRoutes(final String startLoc, final String endLoc, final String routesID, final String savedRouteID,
-                   final String accoID, final String savedAt) {
+                   final String accoID, final Timestamp savedAt) {
      this.startLoc = startLoc;
      this.endLoc = endLoc;
      this.routesID = routesID;
@@ -41,5 +42,5 @@ public class SavedRoutes {
 
     public String getAccoID() {return accoID;}
 
-    public String getSavedAt() {return savedAt;}
+    public Timestamp getSavedAt() {return savedAt;}
 }
