@@ -283,5 +283,28 @@ public class RunningAppDataModel {
         // Return the list of liked routes
         return likedRoutes;
     }
+    public static List<Route> getRoutes(Connection connection, String accID) throws SQLException {
+        List<Route> routes = new ArrayList<>();
+        String query = "SELECT startLoc, endLoc, routeID, accoID, location, distancePreference FROM routes WHERE accoID = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, accID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String startLoc = rs.getString("startLoc");
+                    String endLoc = rs.getString("endLoc");
+                    String routeID = rs.getString("routeID");
+                    String location = rs.getString("location");
+                    double distancePreference = rs.getDouble("distancePreference");
+
+                    // Create a Route object and add it to the list
+                    Route route = new Route(startLoc, endLoc, routeID, accID, location, distancePreference);
+                    routes.add(route);
+                }
+            }
+        }
+
+        return routes;
+    }
     // Other methods for updating, deleting, and retrieving data can be added as needed.
 }
