@@ -285,14 +285,14 @@ public class RunningAppDataModel {
     }
      public static List<Route> getRoutes(Connection connection, String accID) throws SQLException {
         List<Route> routes = new ArrayList<>();
-        String query = "SELECT startLoc, endLoc, routeID, accoID, location, distancePreference FROM routes WHERE accoID = ?";
+        String query = "SELECT startLocation, endLocation, routeID, accID, location, distancePreference FROM routes WHERE accoID = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, accID);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    String startLoc = rs.getString("startLoc");
-                    String endLoc = rs.getString("endLoc");
+                    String startLoc = rs.getString("startLocation");
+                    String endLoc = rs.getString("endLocation");
                     String routeID = rs.getString("routeID");
                     String location = rs.getString("location");
                     String distancePreference = rs.getString("distancePreference");
