@@ -34,18 +34,25 @@ public class RunningAppView {
    * @param routes the list of routes to display
    */
   public static void displayRoutes(List<Routes> routes) { //Sammi & Marcus
-    if (routes == null || routes.isEmpty()) {
-        System.out.println("No routes to display.");
-        return;
-    }
-    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-    System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
-        "location", "distancePreference");
-    for (Routes route: routes) {
-      System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getStartLocation(), route.getEndLocation(),
-          route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
-    }
-    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+      final int LINE_WIDTH = 100;
+
+      if (routes == null || routes.isEmpty()) {
+          System.out.println("No routes to display.");
+          return;
+      }
+
+      System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+      System.out.printf("%-25s %-25s %-8s %-6s %-20s %-10s\n",
+              "startLocation", "endLocation", "routeID", "accID", "location", "distancePreference");
+
+      for (Routes route : routes) {
+          System.out.printf("%-25s %-25s %-8s %-6s %-20s %-10s\n",
+                  route.getStartLocation(), route.getEndLocation(),
+                  route.getRouteID(), route.getAccID(),
+                  route.getLocation(), route.getDistancePreference());
+      }
+
+      System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
 
  /**
