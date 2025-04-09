@@ -326,14 +326,14 @@ public class RunningAppDataModel {
         stmt.setString(1, location);
         try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                String startLoc = rs.getString("startLocation");
-                String endLoc = rs.getString("endLocation");
+                String startLoc = rs.getString("startLoc");
+                String endLoc = rs.getString("endLoc");
                 String routeID = rs.getString("routeID");
-                String accoID = rs.getString("accID");
+                String accoID = rs.getString("accoID");
                 String routeLocation = rs.getString("location");
                 String distancePreference = rs.getString("distancePreference");
               
-                Routes route = new Routes(startLocation, endLocation, routeID, accID, location, distancePreference);
+                Routes route = new Routes(startLoc, endLoc, routeID, accoID, location, distancePreference);
                 routes.add(route);
             }
         }
@@ -348,14 +348,14 @@ public class RunningAppDataModel {
         stmt.setString(1, location);
         try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                String startLoc = rs.getString("startLocation");
-                String endLoc = rs.getString("endLocation");
+                String startLoc = rs.getString("startLoc");
+                String endLoc = rs.getString("endLoc");
                 String routeID = rs.getString("routeID");
-                String accoID = rs.getString("accID");
+                String accoID = rs.getString("accoID");
                 String routeLocation = rs.getString("location");
                 String distancePreference = rs.getString("distancePreference");
 
-                Routes route = new Routes(startLocation, endLocation, routeID, accID, location, distancePreference);
+                Routes route = new Routes(startLoc, endLoc, routeID, accoID, location, distancePreference);
                 routes.add(route);
             }
         }
