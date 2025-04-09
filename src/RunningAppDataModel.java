@@ -76,7 +76,7 @@ public class RunningAppDataModel {
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, route.getStartLocation());
       stmt.setString(2, route.getEndLocation());
-      stmt.setString(3, route.getRouteID());
+      stmt.setString(3, route.getRoutesID());
       stmt.setString(4, route.getAccID());
       stmt.setString(5, route.getLocation());
       stmt.setString(6, route.getDistancePreference());
@@ -126,7 +126,7 @@ public class RunningAppDataModel {
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, savedRoute.getStartLoc());
       stmt.setString(2, savedRoute.getEndLoc());
-      stmt.setString(3, savedRoute.getRouteID());
+      stmt.setString(3, savedRoute.getRoutesID());
       stmt.setString(4, savedRoute.getSavedRouteID());
       stmt.setString(5, savedRoute.getAccoID());
       stmt.setTimestamp(6, savedRoute.getSavedAt()); // Timestamp
