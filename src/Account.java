@@ -19,7 +19,7 @@ public class Account {
  * @param friends the friends that the account has
  */
 
- public Account(final String accountName, final String accountNumber, final String userID
+ public Account(final String accountName, final String accountNumber, final String userID,
                 final String accountID, final String friends){
     this.accountName = accountName;
     this.accountNumber = accountNumber;
