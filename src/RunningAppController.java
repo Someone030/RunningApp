@@ -4,16 +4,24 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-//everything copied and pasted for reference
 /**
- * The MovieController class handles the user interactions and controls the flow of the movie
- * application.
+ * The RunningAppController class handles the user interactions and controls the flow of the running
+ * motivation application.
  */
-/**
-public class MovieController {
-  private static final Logger logger = Logger.getLogger(MovieController.class.getName());
+public class RunningAppController {
+  private static final Logger logger = Logger.getLogger(RunningAppController.class.getName());
   private static final Scanner in = new Scanner(System.in);
-*/
+  /**
+   * Controls the main loop of the running motivation application.
+   *
+   * @param connection the database connection
+   * @param userId the user ID
+   * @throws SQLException if a database access error occurs
+   */
+
+//everything copied and pasted for reference
+
+
   /**
    * Controls the main loop of the movie application.
    *
