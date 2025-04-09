@@ -153,10 +153,13 @@ public class RunningAppDataModel {
       ResultSet rs = stmt.executeQuery();
       while (rs.next()) {
         SavedRoutes savedRoute = new SavedRoutes(
-          rs.getString("username"),
-          rs.getString("route_name"),
-          rs.getTimestamp("date_saved")
-        );
+                rs.getString("start_loc"),
+                rs.getString("end_loc"),
+                rs.getString("routes_id"),
+                rs.getString("saved_route_id"),
+                rs.getString("acco_id"),
+                rs.getTimestamp("saved_At")
+            );
         savedRoutes.add(savedRoute);
       }
     } catch (SQLException e) {
