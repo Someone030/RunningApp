@@ -61,7 +61,7 @@ public class RunningAppController {
   //get all routes would be in the running app data model file while the display routes is in the view file
   
   private static void listAllRoutes(Connection connection, String accID) throws SQLException {
-    List<Route> routes = RunningAppDataModel.getRoutes(connection, accID);
+    List<Routes> routes = RunningAppDataModel.getRoutes(connection, accID);
     RunningAppView.displayRoutes(routes);
   }
 
