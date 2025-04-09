@@ -303,5 +303,22 @@ public class RunningAppDataModel {
       }
       return routes;
     }
+    public static List<String> getFriends(Connection connection, String accountID) throws SQLException {
+      String query = "SELECT friends FROM accounts WHERE accountID = ?";
+      List<String> friendList = new ArrayList<>();
+  
+      try (PreparedStatement stmt = connection.prepareStatement(query)) {
+          stmt.setString(1, accountID);
+          try (ResultSet rs = stmt.executeQuery()) {
+              if (rs.next()) {
+                  String friends = rs.getString("friends");
+                  Account account = new Account("", "", accountID, "", friends);  // Create an Account object
+                  friendList = account.getFriendList();
+              }
+          }
+      }
+      return friendList;
+  }
+
     // Other methods for updating, deleting, and retrieving data can be added as needed.
 }
