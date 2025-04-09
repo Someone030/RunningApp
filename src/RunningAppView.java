@@ -78,6 +78,21 @@ public class RunningAppView {
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
  }
 
+  public static void sayGoodbye() {
+    System.out.println("Goodbye!");
+  }
+
+  public static void promptForInvalidChoice() {
+    System.out.println("Invalid choice. Please try again.");
+  }
+
+  public static void displaySystemErrorMsg(Exception e) {
+    System.err.println("System error. Call technical support! " + e.getMessage());
+  }
+
+  public static void displayLogErrorMsg(Exception e) {
+    System.err.println("Error initializing log file: " + e.getMessage());
+  }
   /**
    * Displays a list of studios with their details.
    *
