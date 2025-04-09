@@ -83,8 +83,8 @@ public class RunningAppView {
    *
    * @param studios the list of studios to display
    */
-
-  public static void displayFriends(List<Studio> studios) {
+//EDIT THIS********************************
+  public static void displayFriends(List<Friend> friends) {
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-24s %10s %32s\n", "Name", "Address ID", "President Certification Number");
     for (Studio studio : studios) {
@@ -100,8 +100,8 @@ public class RunningAppView {
    *
    * @param transactions the list of customer transactions to display
    */
-
-  public static void displayStartingRoutes(List<CustomerTransaction> transactions) {
+//EDIT THIS********************************
+  public static void displayStartingRoutes(...) {
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-9s %16s %20s %10s %9s\n", "Trans No", "Customer ID", "Customer Name",
         "Date", "Total");
@@ -118,8 +118,8 @@ public class RunningAppView {
    *
    * @param invoice the invoice to display
    */
-
-  public static void displayOrderedRoutes(Invoice invoice) {
+//EDIT THIS********************************
+  public static void displayOrderedRoutes(...) {
     if (invoice == null || invoice.isEmpty()) {
       System.out.printf("No invoice found for the transaction number or the customer.\n");
       return;
