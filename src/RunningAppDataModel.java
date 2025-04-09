@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
 
 /**
  * This class provides methods to interact with the Running App database, Along with a few other classes,
@@ -281,28 +282,26 @@ public class RunningAppDataModel {
     }
     return likedRoutes;
     }
-     public static List<Route> getRoutes(Connection connection, String accID) throws SQLException {
-        List<Route> routes = new ArrayList<>();
-        String query = "SELECT startLocation, endLocation, routeID, accID, location, distancePreference FROM routes WHERE accID = ?";
-
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, accID);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    String startLoc = rs.getString("startLocation");
-                    String endLoc = rs.getString("endLocation");
-                    String routeID = rs.getString("routeID");
-                    String location = rs.getString("location");
-                    String distancePreference = rs.getString("distancePreference");
-
-                    // Create a Route object and add it to the list
-                    Route route = new Route(startLocation, endLocation, routeID, accID, location, distancePreference);
-                    routes.add(route);
-                }
-            }
-        }
-
-        return routes;
+    public static List<Routes> getRoutes(Connection connection, String accID) throws SQLException {
+      List<Routes> routes = new ArrayList<>();
+      String query = "SELECT startLocation, endLocation, routeID, accID, location, distancePreference FROM routes WHERE accID = ?";
+      try (PreparedStatement stmt = connection.prepareStatement(query)) {
+          stmt.setString(1, accID);
+          try (ResultSet rs = stmt.executeQuery()) {
+              while (rs.next()) {
+                  String startLocation = rs.getString("startLocation");
+                  String endLocation = rs.getString("endLocation");
+                  String routeID = rs.getString("routeID");
+                  String location = rs.getString("location");
+                  String distancePreference = rs.getString("distancePreference");
+  
+                  // Create a Routes object and add it to the list
+                  Routes route = new Routes(startLocation, endLocation, routeID, accID, location, distancePreference);
+                  routes.add(route);
+              }
+          }
+      }
+      return routes;
     }
     // Other methods for updating, deleting, and retrieving data can be added as needed.
 }
