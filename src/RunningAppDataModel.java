@@ -319,6 +319,28 @@ public class RunningAppDataModel {
       }
       return friendList;
   }
+  public static List<Routes> getRoutesEndingAtLocation(Connection connection, String location) throws SQLException {
+    List<Routes> routes = new ArrayList<>();
+    String query = "SELECT * FROM routes WHERE endLocation = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        stmt.setString(1, location);
+        try (ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                String startLoc = rs.getString("startLocation");
+                String endLoc = rs.getString("endLocation");
+                String routeID = rs.getString("routeID");
+                String accoID = rs.getString("accID");
+                String routeLocation = rs.getString("location");
+                String distancePreference = rs.getString("distancePreference");
+
+                Routes route = new Routes(startLocation, endLocation, routeID, accID, location, distancePreference);
+                routes.add(route);
+            }
+        }
+    }
+    return routes;
+  }
+
 
     // Other methods for updating, deleting, and retrieving data can be added as needed.
 }
