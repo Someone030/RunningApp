@@ -251,34 +251,35 @@ public class RunningAppDataModel {
      * @return a list of liked routes for the given user
      * @throws SQLException if an error occurs while interacting with the database
      */
-    public static List<Route> getLikedRoutes(Connection connection, String accoID) throws SQLException {
+    public static List<SavedRoutes> getLikedRoutes(Connection connection, String accoID) throws SQLException {
         // List to store the liked routes
-        List<Route> likedRoutes = new ArrayList<>();
+        List<SavedRoute> likedRoutes = new ArrayList<>();
         
         // SQL query to get liked routes based on user ID
         String query = "SELECT startLoc, endLoc, routesID, savedRouteID, accoID, savedAt FROM savedRoutes WHERE accoID = ?";
         
         // Prepare the statement to prevent SQL injection
          try (PreparedStatement stmt = connection.prepareStatement(query)) {
-           stmt.setString(1, accoID);  // Set the user ID parameter
+        stmt.setString(1, accoID);  // Set the account ID parameter
 
-            // Execute the query and process the result
-             try (ResultSet rs = stmt.executeQuery()) {
+        // Execute the query and process the result
+        try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 // For each liked route, create a new SavedRoutes object and add it to the list
                 String startLoc = rs.getString("startLoc");
                 String endLoc = rs.getString("endLoc");
                 String routesID = rs.getString("routesID");
                 String savedRouteID = rs.getString("savedRouteID");
-                String accoIDFromDB = rs.getString("accoID");
+                String accoIDFromDB = rs.getString("accoID");  // It might be useful to check if this matches the parameter
                 Timestamp savedAt = rs.getTimestamp("savedAt");
 
+                // Create a new SavedRoutes object
                 SavedRoutes route = new SavedRoutes(startLoc, endLoc, routesID, savedRouteID, accoIDFromDB, savedAt);
                 likedRoutes.add(route);
-                }
             }
         }
-        return likedRoutes;
+    }
+    return likedRoutes;
     }
      public static List<Route> getRoutes(Connection connection, String accID) throws SQLException {
         List<Route> routes = new ArrayList<>();
