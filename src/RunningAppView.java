@@ -116,7 +116,7 @@ public class RunningAppView {
    * @param transactions the list of customer transactions to display
    */
 //EDIT THIS********************************
-  public static void displayStartingRoutes(...) {
+  public static void displayStartingRoutes(List<Routes> routes) {
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-9s %16s %20s %10s %9s\n", "Trans No", "Customer ID", "Customer Name",
         "Date", "Total");
@@ -134,7 +134,7 @@ public class RunningAppView {
    * @param invoice the invoice to display
    */
 //EDIT THIS********************************
-  public static void displayOrderedRoutes(...) {
+  public static void displayOrderedRoutes(List<Routes> orderedRoutes) {
     if (invoice == null || invoice.isEmpty()) {
       System.out.printf("No invoice found for the transaction number or the customer.\n");
       return;
