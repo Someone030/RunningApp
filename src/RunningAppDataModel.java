@@ -362,7 +362,27 @@ public class RunningAppDataModel {
     }
     return routes;
   }
-
-
+  public static Account getUserById(Connection connection, String accountID) throws SQLException {
+      // SQL query to get user by their account ID
+      String query = "SELECT * FROM accounts WHERE accountID = ?";
+  
+      try (PreparedStatement stmt = connection.prepareStatement(query)) {
+          stmt.setString(1, accountID);  // Set the accountID parameter
+  
+          try (ResultSet rs = stmt.executeQuery()) {
+              if (rs.next()) {
+                  String accountName = rs.getString("accountName");
+                  String accountNumber = rs.getString("accountNumber");
+                  String userID = rs.getString("userID");
+                  String accountIDFromDB = rs.getString("accountID");
+                  String friends = rs.getString("friends");
+                  // Return a new Account object
+                  return new Account(accountName, accountNumber, userID, accountID, friends);
+              } else {
+                  return null;  // Account not found
+              }
+          }
+      }
+  }
     // Other methods for updating, deleting, and retrieving data can be added as needed.
 }
