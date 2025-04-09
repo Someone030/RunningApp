@@ -101,7 +101,7 @@ public class RunningAppController {
     String date = in.next();
     
     // get total distance ran by the user on the specific day
-    double totalDistance = RunningAppDataModel.getTotalDistanceRanOnDay(connection, accoID, date);
+    List<Double> totalDistances = RunningAppDataModel.getTotalDistanceRanOnDay(connection, accoID, date);
     RunningAppView.displayDistanceRoutes(totalDistances);
   }
 }
