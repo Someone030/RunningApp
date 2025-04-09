@@ -209,5 +209,39 @@ public class RunningAppDataModel {
       e.printStackTrace();
     }
     return achievementList;
-  } // Other methods for updating, deleting, and retrieving data can be added as needed.
+  } 
+  /**
+     * Retrieves the distances ran by a user on a specific date.
+     *
+     * @param connection the database connection
+     * @param accoID the account ID of the user
+     * @param date the date to fetch the runs for (format: YYYY-MM-DD)
+     * @return a list of distances ran on the specified date
+     * @throws SQLException if an error occurs while interacting with the database
+     */
+    public static List<Double> getTotalDistanceRanOnDay(Connection connection, String accoID, String date) throws SQLException {
+        // List to store the distances ran on the specific day
+        List<Double> distances = new ArrayList<>();
+        
+        // SQL query to get the distances based on account ID and date
+        String query = "SELECT distance FROM runs WHERE accoID = ? AND DATE(runDate) = ?";
+        
+        // Prepare the statement to prevent SQL injection
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, accoID);  // Set the account ID parameter
+            stmt.setString(2, date);    // Set the date parameter
+
+            // Execute the query and process the result
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    // Add each distance to the list
+                    distances.add(rs.getDouble("distance"));
+                }
+            }
+        }
+        
+        // Return the list of distances
+        return distances;
+    }
+    // Other methods for updating, deleting, and retrieving data can be added as needed.
 }
