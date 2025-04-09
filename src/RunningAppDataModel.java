@@ -283,7 +283,7 @@ public class RunningAppDataModel {
     }
      public static List<Route> getRoutes(Connection connection, String accID) throws SQLException {
         List<Route> routes = new ArrayList<>();
-        String query = "SELECT startLocation, endLocation, routeID, accID, location, distancePreference FROM routes WHERE accoID = ?";
+        String query = "SELECT startLocation, endLocation, routeID, accID, location, distancePreference FROM routes WHERE accID = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, accID);
@@ -296,7 +296,7 @@ public class RunningAppDataModel {
                     String distancePreference = rs.getString("distancePreference");
 
                     // Create a Route object and add it to the list
-                    Route route = new Route(startLoc, endLoc, routeID, accID, location, distancePreference);
+                    Route route = new Route(startLocation, endLocation, routeID, accID, location, distancePreference);
                     routes.add(route);
                 }
             }
