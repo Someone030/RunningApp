@@ -65,8 +65,8 @@ public class RunningAppController {
     RunningAppView.displayRoutes(routes);
   }
 
-  private static void listFriendsOfUser(Connection connection, String userId) throws SQLException {
-    List<User> friends = RunningAppDataModel.getFriends(connection, userId);
+  private static void listFriendsOfUser(Connection connection, String accountID) throws SQLException {
+    List<String> friends = RunningAppDataModel.getFriends(connection, accountID);
     RunningAppView.displayFriends(friends);
   }
 
