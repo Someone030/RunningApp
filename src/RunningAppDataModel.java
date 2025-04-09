@@ -169,11 +169,10 @@ public class RunningAppDataModel {
      * @return true if the achievements was successfully created, false otherwise.
      */
   public boolean createAchievements(Achievements achievements) {
-    String query = "INSERT INTO Achievements (username, achievements_name) VALUES (?, ?)";
+    String query = "INSERT INTO Achievements (run_streak, goals) VALUES (?, ?)";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
-      stmt.setString(1, achievements.getUsername());
-      stmt.setString(2, achievements.getAchievementsName());
-      stmt.setTimestamp(3, achievements.getDateEarned());
+      stmt.setString(1, achievements.getRunStreak());
+      stmt.setString(2, achievements.getGoals());
       int result = stmt.executeUpdate();
       return result > 0;
     } catch (SQLException e) {
