@@ -42,4 +42,8 @@ public class Routes{
     public String getLocation() {return location;}
 
     public String getDistancePreference() {return distancePreference;}
+
+    public double getDistance() {
+        return distance;
+    }
 }
