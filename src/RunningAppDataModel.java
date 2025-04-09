@@ -1,10 +1,7 @@
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +28,11 @@ public class RunningAppDataModel {
      * @return true if the user was successfully created, false otherwise.
      */
   public boolean createUser(User user) {
-    String query = "INSERT INTO Users (username, password, email, icon) VALUES (?, ?, ?, ?)";
+    String query = "INSERT INTO Users (username, password, icon) VALUES (?, ?, ?)";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, user.getUsername());
       stmt.setString(2, user.getPassword());
-      stmt.setString(3, user.getEmail());
-      stmt.setString(4, user.getIcon());
+      stmt.setString(3, user.getIcon());
       int result = stmt.executeUpdate();
       return result > 0;
     } catch (SQLException e) {
@@ -60,7 +56,6 @@ public class RunningAppDataModel {
         return new User(
           rs.getString("username"),
           rs.getString("password"),
-          rs.getString("email"),
           rs.getString("icon")
         );
       }
@@ -77,12 +72,14 @@ public class RunningAppDataModel {
      * @return true if the route was successfully created, false otherwise.
      */
   public boolean createRoute(Routes route) {
-    String query = "INSERT INTO Routes (route_name, distance, time, location) VALUES (?, ?, ?, ?)";
+    String query = "INSERT INTO Routes (start_loc, end_loc, route_id, acc_id, location, distance_pref) VALUES (?, ?, ?, ?, ?, ?)";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
-      stmt.setString(1, route.getRouteName());
-      stmt.setDouble(2, route.getDistance());
-      stmt.setDouble(3, route.getTime());
-      stmt.setString(4, route.getLocation());
+      stmt.setString(1, route.getStartLocation());
+      stmt.setString(2, route.getEndLocation());
+      stmt.setString(3, route.getRouteID());
+      stmt.setString(4, route.getAccID());
+      stmt.setString(5, route.getLocation());
+      stmt.setString(6, route.getDistancePreference());
       int result = stmt.executeUpdate();
       return result > 0;
     } catch (SQLException e) {
@@ -96,17 +93,19 @@ public class RunningAppDataModel {
      * 
      * @return A list of Routes objects.
      */
-  public List<Routes> getAllRoutes() {
+  public List<Routes> getAllRoutes(String accID) {
     List<Routes> routes = new ArrayList<>();
-    String query = "SELECT * FROM Routes";
-    try (Statement stmt = connection.createStatement()) {
-      ResultSet rs = stmt.executeQuery(query);
+    String query = "SELECT * FROM Routes WHERE accID = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+      ResultSet rs = stmt.executeQuery();
       while (rs.next()) {
         Routes route = new Routes(
-          rs.getString("route_name"),
-          rs.getDouble("distance"),
-          rs.getDouble("time"),
-          rs.getString("location")
+          rs.getString("start_loc"),
+          rs.getString("end_loc"),
+          rs.getString("route_id"),
+          rs.getString("acc_id"),
+          rs.getString("location"),
+          rs.getString("distance_pref")
         );
         routes.add(route);
       }
@@ -145,11 +144,11 @@ public class RunningAppDataModel {
      * @param username The username of the user.
      * @return A list of SavedRoutes objects.
      */
-  public List<SavedRoutes> getSavedRoutes(String username) {
+  public List<SavedRoutes> getSavedRoutes(String accoID) {
     List<SavedRoutes> savedRoutes = new ArrayList<>();
-    String query = "SELECT * FROM SavedRoutes WHERE username = ?";
+    String query = "SELECT * FROM SavedRoutes WHERE accoID = ?";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
-      stmt.setString(1, username);
+      stmt.setString(1, accoID);
       ResultSet rs = stmt.executeQuery();
       while (rs.next()) {
         SavedRoutes savedRoute = new SavedRoutes(
