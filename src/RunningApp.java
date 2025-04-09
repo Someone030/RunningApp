@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-/** ALL OF THIS IS COPY AND PASTED FOR REFERENCE
+//ALL OF THIS IS COPY AND PASTED FOR REFERENCE
 
 /**
  * The RunApp class is the main entry point for the application.
