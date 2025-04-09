@@ -76,7 +76,7 @@ public class RunningAppDataModel {
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, route.getStartLocation());
       stmt.setString(2, route.getEndLocation());
-      stmt.setString(3, route.getRoutesID());
+      stmt.setString(3, route.getRouteID());
       stmt.setString(4, route.getAccID());
       stmt.setString(5, route.getLocation());
       stmt.setString(6, route.getDistancePreference());
