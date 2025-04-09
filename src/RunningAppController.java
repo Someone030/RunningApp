@@ -8,129 +8,100 @@ import java.util.logging.Logger;
  * The RunningAppController class handles the user interactions and controls the flow of the running
  * motivation application.
  */
+
 public class RunningAppController {
   private static final Logger logger = Logger.getLogger(RunningAppController.class.getName());
   private static final Scanner in = new Scanner(System.in);
   /**
-   * Controls the main loop of the running motivation application.
+   * Controls the main loop of the running application.
    *
    * @param connection the database connection
    * @param userId the user ID
    * @throws SQLException if a database access error occurs
    */
-
-//everything copied and pasted for reference
-
-
-  /**
-   * Controls the main loop of the movie application.
-   *
-   * @param connection the database connection
-   * @param storeNo the store number
-   * @param customerId the customer ID
-   * @throws SQLException if a database access error occurs
-   */
-  /**
-  public static void controllerLoop(Connection connection, String storeNo, String customerId)
-      throws SQLException {
-    if (MovieDataModel.getCustomerById(connection, customerId) == null) {
-      MovieView.displayInvalidCustomerMsg();
+  public static void controllerLoop(Connection connection, String userId) throws SQLException {
+    if (RunningAppDataModel.getUserById(connection, userId) == null) {
+      RunningAppView.displayInvalidUserMsg();
       return;
     }
-    logger.info("Starting the movie application controller loop for Customer ID: " + customerId);
-
+    logger.info("Starting the running application controller loop for User ID: " + userId);
     int action = 0;
     do {
-      System.out.print(MovieView.getMenuText());
+      System.out.print(RunningAppView.getMenuText());
       action = in.nextInt();
       switch (action) {
         case 1:
-          listAllMovies(connection);
+          listAllLikedRoutes(connection, userId);
           break;
         case 2:
-          listAllStudios(connection);
+          listFriendsOfUser(connection, userId);
           break;
         case 3:
-          listAmblinStudios(connection);
+          listRoutesEndingAtLocation(connection);
           break;
         case 4:
-          listCustomerTransactionSummary(connection, storeNo, customerId);
+          listRoutesStartingAtLocation(connection);
           break;
         case 5:
-          printCustomerInvoice(connection, storeNo, customerId);
+          orderLikedRoutesByDistance(connection, userId);
           break;
         case 6:
-          orderMovieMedia(connection, storeNo, customerId);
+          printTotalDistanceRanOnDay(connection, userId);
           break;
         case 0:
-          MovieView.sayGoodbye();
+          RunningAppView.sayGoodbye();
           break;
         default:
-          MovieView.promptForInvalidChoice();
+          RunningAppView.promptForInvalidChoice();
       }
     } while (action != 0);
   }
-
-  private static void listAllMovies(Connection connection) throws SQLException {
-    List<Movie> movies = MovieDataModel.getAllMovies(connection);
-    MovieView.displayMovies(movies);
+  
+  //note to myself cz I'm getting confused :D
+  //get all routes would be in the running app data model file while the display routes is in the view file
+  
+  private static void listAllLikedRoutes(Connection connection, String userId) throws SQLException {
+    List<Route> likedRoutes = RunningAppDataModel.getLikedRoutes(connection, userId);
+    RunningAppView.displayRoutes(likedRoutes);
   }
 
-  private static void listAllStudios(Connection connection) throws SQLException {
-    List<Studio> studios = MovieDataModel.getAllStudios(connection);
-    MovieView.displayStudios(studios);
+  private static void listFriendsOfUser(Connection connection, String userId) throws SQLException {
+    List<User> friends = RunningAppDataModel.getFriends(connection, userId);
+    RunningAppView.displayFriends(friends);
   }
 
-  private static void listAmblinStudios(Connection connection) throws SQLException {
-    List<Studio> studios = MovieDataModel.getAmblinStudios(connection);
-    MovieView.displayStudios(studios);
+  private static void listRoutesEndingAtLocation(Connection connection) throws SQLException {
+    System.out.print("Enter the location where the routes end: ");
+    String location = in.next();
+    //get routes that end at the specified location
+    List<Route> routes = RunningAppDataModel.getRoutesEndingAtLocation(connection, location);
+    RunningAppView.displayEndingRoutes(routes);  // Display the routes that end at the location
   }
 
-  private static void listCustomerTransactionSummary(Connection connection, String storeNo,
-      String customerId) throws SQLException {
-    List<CustomerTransaction> transactions =
-        MovieDataModel.getCustomerTransactions(connection, storeNo, customerId);
-    MovieView.displayTransactions(transactions);
+  private static void listRoutesStartingAtLocation(Connection connection) throws SQLException {
+    System.out.print("Enter the location where the routes start: ");
+    String location = in.next();
+    //get routes that start at the specified location
+    List<Route> routes = RunningAppDataModel.getRoutesStartingAtLocation(connection, location);
+    RunningAppView.displayStartingRoutes(routes);  // Display the routes that start at the location
   }
 
-  private static void printCustomerInvoice(Connection connection, String storeNo, String customerId)
-      throws SQLException {
-    MovieView.promptForTransactionNo();
-    String transactionNo = in.next();
-    Invoice invoice = MovieDataModel.getCustomerInvoiceByTransactionNo(connection, storeNo,
-        customerId, transactionNo);
-    MovieView.displayCustomerInvoice(invoice);
+  private static void orderLikedRoutesByDistance(Connection connection, String userId) throws SQLException {
+    List<Route> likedRoutes = RunningAppDataModel.getLikedRoutes(connection, userId);
+    
+    // Sort the liked routes based on distance from shortest to longest
+    likedRoutes.sort((route1, route2) -> Double.compare(route1.getDistance(), route2.getDistance()));
+    
+    // Display the sorted list of routes
+    RunningAppView.displayOrderedRoutes(likedRoutes);
   }
 
-
-  private static void orderMovieMedia(Connection connection, String storeNo, String customerId)
-      throws SQLException {
-    ShoppingCart cart = new ShoppingCart();
-    List<MovieItem> movieItems = MovieDataModel.getAllMovieItems(connection);
-    while (true) {
-      MovieView.displayItemOrderMenu(movieItems);
-      int action = in.nextInt();
-      if (action < 0) {
-        MovieView.displayCancelMsg();
-        break;
-      }
-      if (action == 0 && cart.isEmpty()) {
-        MovieView.displayEmptyCartMsg();
-        continue;
-      }
-      if (action == 0) {
-        String transNo = MovieDataModel.confirmOrder(connection, storeNo, customerId, cart);
-        MovieView.displayConfirmedMsg(transNo);
-        break;
-      }
-      if (action > 0 && action <= movieItems.size()) {
-        int row = action;
-        MovieItem item = movieItems.get(row - 1);
-        CartItem cartItem = new CartItem(item, 1);
-        cart.addItem(cartItem);
-        item.setQuantity(item.getQuantity() - 1);
-      }
-    }
+  private static void printTotalDistanceRanOnDay(Connection connection, String userId) throws SQLException {
+    System.out.print("Enter the date (YYYY-MM-DD) to get total distance: ");
+    String date = in.next();
+    
+    // Fetch total distance ran by the user on the specific day
+    double totalDistance = RunningAppDataModel.getTotalDistanceRanOnDay(connection, userId, date);
+    RunningAppView.displayDistanceRoutes(totalDistance);
   }
 }
-*/
