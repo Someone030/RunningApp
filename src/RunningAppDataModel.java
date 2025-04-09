@@ -123,18 +123,21 @@ public class RunningAppDataModel {
      * @return true if the saved route was successfully created, false otherwise.
      */
   public boolean saveRoute(SavedRoutes savedRoute) {
-    String query = "INSERT INTO SavedRoutes (username, route_name, date_saved) VALUES (?, ?, ?)";
+    String query = "INSERT INTO SavedRoutes (start_loc, end_loc, routes_id, saved_route_id, acco_id, date_saved) VALUES (?, ?, ?, ?, ?, ?)";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
-      stmt.setString(1, savedRoute.getUsername());
-      stmt.setString(2, savedRoute.getRouteName());
-      stmt.setTimestamp(3, savedRoute.getDateSaved());
+      stmt.setString(1, savedRoute.getStartLoc());
+      stmt.setString(2, savedRoute.getEndLoc());
+      stmt.setString(3, savedRoute.getRoutesID());
+      stmt.setString(4, savedRoute.getSavedRouteID());
+      stmt.setString(5, savedRoute.getAccoID());
+      stmt.setTimestamp(6, savedRoute.getSavedAt()); // Timestamp
       int result = stmt.executeUpdate();
       return result > 0;
     } catch (SQLException e) {
       e.printStackTrace();
       return false;
     }
-  }
+}
 
   /**
      * Retrieves the saved routes for a user from the database.
