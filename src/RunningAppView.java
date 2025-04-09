@@ -100,7 +100,7 @@ public class RunningAppView {
    * @param friends the list of friends to display
    */
   
-  public static void displayFriends(List<Friend> friends) {
+  public static void displayFriends(List<Friend> friends) { //Sammi & Marcus
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-20s %-20s\n", "Username", "Nickname");
     for (Friend friend : friends) {
@@ -115,7 +115,7 @@ public class RunningAppView {
    * @param routes the list of routes to display
    */
   
-  public static void displayStartingRoutes(List<Routes> routes) {
+  public static void displayStartingRoutes(List<Routes> routes) { //Sammi & Marcus
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
         "location", "distancePreference");
@@ -132,7 +132,7 @@ public class RunningAppView {
    * @param orderedRoutes the list of ordered routes to display
    */
   
-  public static void displayOrderedRoutes(List<Routes> orderedRoutes) {
+  public static void displayOrderedRoutes(List<Routes> orderedRoutes) { //Sammi & Marcus
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
         "location", "distancePreference");
