@@ -97,27 +97,6 @@ public class MovieView {
   }
 */
 
-
-  /**
-   * Displays a list of movie items with their details.
-   *
-   * @param movieItems the list of movie items to display
-   */
-/**
-  public static void displayEndingRoutes(List<MovieItem> movieItems) { //Sammi & Marcus
-    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-    System.out.printf("%-3s %-8s %-22s %4s %6s %8s %10s\n", "Row", "Item", "Title", "Year",
-        "Medium", "QTY", "Item Price");
-    int row = 0;
-    for (MovieItem movieItem : movieItems) {
-      row++;
-      System.out.printf("%3d %-8d %-22s %4d %-6s %8d %10.2f\n", row, movieItem.getItemNum(),
-          movieItem.getMovieTitle(), movieItem.getMovieYear(), movieItem.getMediaType(),
-          movieItem.getQuantity(), movieItem.getItemPrice());
-    }
-    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-  }
-*/
   /**
    * Displays a list of customer transactions with their details.
    *
@@ -168,51 +147,10 @@ public class MovieView {
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
 */
-  /**
-   * Displays the item order menu with the given list of movie items.
-   *
-   * @param movieItems the list of movie items to display in the order menu
-   */
+
 
 /**
-  public static void displayDistanceRoutes(List<MovieItem> movieItems) { //Sammi & Marcus
-    MovieView.displayMovieItems(movieItems);
-    System.out.printf("-1 Cancel order\n");
-    System.out.printf(" 0 Confirm order\n");
-    System.out.print("Add row number to order, or cancel, or confirm order: ");
-  }
-
-  public static void displayCancelMsg() {
-    System.out.printf("Shopping cart order cancelled.\n");
-  }
-
-  public static void displayConfirmedMsg(String transNo) {
-    System.out.printf("Shopping cart order %s confirmed and placed.\n", transNo);
-  }
-
-  public static void displayEmptyCartMsg() {
-    System.out.printf("Shopping cart is empty, and no order to confirm.\n");
-  }
-
-  public static void sayGoodbye() {
-    System.out.println("Goodbye!");
-  }
 
 
-  public static void promptForInvalidChoice() {
-    System.out.println("Invalid choice. Please try again.");
-  }
-
-  public static void promptForTransactionNo() {
-    System.out.print("Enter transaction number: ");
-  }
-
-  public static void displaySystemErrorMsg(Exception e) {
-    System.err.println("System error. Call technical support! " + e.getMessage());
-  }
-
-  public static void displayLogErrorMsg(Exception e) {
-    System.err.println("Error initializing log file: " + e.getMessage());
-  }
 }
 */
