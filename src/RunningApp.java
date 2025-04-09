@@ -10,13 +10,13 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 /**
- * The RunApp class is the main entry point for the application.
+ * The RunningApp class is the main entry point for the application.
  * It sets up logging, establishes a database connection, and starts the controller loop.
  */
 
 public class RunningApp {
-  private static final String LOG_FILE = "RunApp.log";
-  private static final Logger logger = Logger.getLogger(RunApp.class.getName());
+  private static final String LOG_FILE = "RunningApp.log";
+  private static final Logger logger = Logger.getLogger(RunningApp.class.getName());
 
   private static final String DB_CONFIG_FILE_KEY = "db.config.file";
   private static final String DB_CONFIG_FILE = "db.properties";
