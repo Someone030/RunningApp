@@ -96,12 +96,12 @@ public class RunningAppController {
     RunningAppView.displayOrderedRoutes(likedRoutes);
   }
 
-  private static void printTotalDistanceRanOnDay(Connection connection, String userId) throws SQLException {
+  private static void printTotalDistanceRanOnDay(Connection connection, String accoID) throws SQLException {
     System.out.print("Enter the date (YYYY-MM-DD) to get total distance: ");
     String date = in.next();
     
-    // Fetch total distance ran by the user on the specific day
-    double totalDistance = RunningAppDataModel.getTotalDistanceRanOnDay(connection, userId, date);
-    RunningAppView.displayDistanceRoutes(totalDistance);
+    // get total distance ran by the user on the specific day
+    List<Double> totalDistances = RunningAppDataModel.getTotalDistanceRanOnDay(connection, accoID, date);
+    RunningAppView.displayDistanceRoutes(totalDistances);
   }
 }
