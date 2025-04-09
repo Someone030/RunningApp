@@ -73,12 +73,8 @@ public class RunningAppView {
 
   public static void displayDistanceRoutes(List<Double> distances) { //Sammi & Marcus
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-    System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
-                      "location", "distancePreference");
-    for (Double distance : distances) {
-      System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getStartLocation(), route.getStartLocation(),
-                        route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
-    }
+    System.out.printf("%-22s %-9s\n", "Total Distance", "Total");
+    System.out.printf("%-22s %-9.2f\n", "Distance Ran:", totalDistance);
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
 
