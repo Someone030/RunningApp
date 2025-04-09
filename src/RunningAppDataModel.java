@@ -195,9 +195,8 @@ public class RunningAppDataModel {
       ResultSet rs = stmt.executeQuery();
       while (rs.next()) {
         Achievements achievements = new Achievements(
-          rs.getString("username"),
-          rs.getString("achievements_name"),
-          rs.getTimestamp("date_earned")
+          rs.getString("run_streak"),
+          rs.getString("goals")
         );
         achievementList.add(achievements);
       }
