@@ -93,69 +93,53 @@ public class RunningAppView {
   public static void displayLogErrorMsg(Exception e) {
     System.err.println("Error initializing log file: " + e.getMessage());
   }
+  
   /**
-   * Displays a list of studios with their details.
+   * Displays a list of friends with their details.
    *
-   * @param studios the list of studios to display
+   * @param friends the list of friends to display
    */
-//EDIT THIS********************************
+  
   public static void displayFriends(List<Friend> friends) {
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-    System.out.printf("%-24s %10s %32s\n", "Name", "Address ID", "President Certification Number");
-    for (Studio studio : studios) {
-      System.out.printf("%-24s %10s %32s\n", studio.getName(), studio.getAddressId(),
-          studio.getPresCertNum());
+    System.out.printf("%-20s %-20s\n", "Username", "Nickname");
+    for (Friend friend : friends) {
+      System.out.printf("%-20s %-20s\n", friend.getUsername(), friend.getNickname());
     }
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
 
-
   /**
-   * Displays a list of customer transactions with their details.
+   * Displays a list of routes starting at a specific location.
    *
-   * @param transactions the list of customer transactions to display
+   * @param routes the list of routes to display
    */
-//EDIT THIS********************************
+  
   public static void displayStartingRoutes(List<Routes> routes) {
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-    System.out.printf("%-9s %16s %20s %10s %9s\n", "Trans No", "Customer ID", "Customer Name",
-        "Date", "Total");
-    for (CustomerTransaction transaction : transactions) {
-      System.out.printf("%-9s %16s %20s %10s %9.2f\n", transaction.getTransactionNo(),
-          transaction.getCustomerId(), transaction.getCustomerName(),
-          transaction.getTransactionDate(), transaction.getTotal());
+    System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
+        "location", "distancePreference");
+    for (Routes route : routes) {
+      System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getStartLocation(), route.getEndLocation(),
+          route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
     }
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
 
   /**
-   * Displays the customer invoice with its details.
+   * Displays a list of routes ordered by distance.
    *
-   * @param invoice the invoice to display
+   * @param orderedRoutes the list of ordered routes to display
    */
-//EDIT THIS********************************
+  
   public static void displayOrderedRoutes(List<Routes> orderedRoutes) {
-    if (invoice == null || invoice.isEmpty()) {
-      System.out.printf("No invoice found for the transaction number or the customer.\n");
-      return;
-    }
-
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-    System.out.printf("Store No: %s\n", invoice.getStoreNo());
-    System.out.printf("Customer: %s (%s)\n", invoice.getCustomerName(), invoice.getCustomerId());
-    System.out.printf("Transaction No: %s\n", invoice.getTransactionNumber());
-    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-    System.out.printf("%-8s %-22s %4s %6s %8s %3s %10s\n", "Item", "Title", "Year", "Medium",
-        "Price", "QTY", "Item Total");
-    for (InvoiceItem item : invoice) {
-      System.out.printf("%-8d %-22s %4d %6s %8.2f %3d %10.2f\n", item.getItemNum(),
-          item.getMovieTitle(), item.getMovieYear(), item.getMediaType(), item.getItemPrice(),
-          item.getQuantity(), item.getLineTotal());
+    System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
+        "location", "distancePreference");
+    for (Routes route : orderedRoutes) {
+      System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getStartLocation(), route.getEndLocation(),
+          route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
     }
-    System.out.printf("\n");
-
-    System.out.printf("Invoice Tax: %54.2f\n", invoice.getTax());
-    System.out.printf("Invoice Total: %52.2f\n", invoice.getTotal());
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
 }
