@@ -104,13 +104,11 @@ public class RunningAppView {
    * @param friends the list of friends to display
    */
   
-  public static void displayFriends(Account account) { //Sammi & Marcus
-    String[] friendsArray = account.getFriends().split(",");
-    
+  public static void displayFriends(List<String> friends) { //Sammi & Marcus
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-20s\n", "Friend Name");
     
-    for (String friendName : friendsArray) {
+    for (String friendName : friends) {
         System.out.printf("%-20s\n", friendName);
     }
     
