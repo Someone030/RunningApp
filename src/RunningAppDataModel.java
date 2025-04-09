@@ -163,17 +163,17 @@ public class RunningAppDataModel {
   }
   
   /**
-     * Creates a new achievement for a user in the database.
+     * Creates a new achievements for a user in the database.
      * 
-     * @param achievement The Achievement object containing achievement details.
-     * @return true if the achievement was successfully created, false otherwise.
+     * @param achievements The Achievements object containing achievements details.
+     * @return true if the achievements was successfully created, false otherwise.
      */
-  public boolean createAchievement(Achievement achievement) {
-    String query = "INSERT INTO Achievements (username, achievement_name, date_earned) VALUES (?, ?, ?)";
+  public boolean createAchievements(Achievements achievements) {
+    String query = "INSERT INTO Achievements (username, achievements_name, date_earned) VALUES (?, ?, ?)";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
-      stmt.setString(1, achievement.getUsername());
-      stmt.setString(2, achievement.getAchievementName());
-      stmt.setTimestamp(3, achievement.getDateEarned());
+      stmt.setString(1, achievements.getUsername());
+      stmt.setString(2, achievements.getAchievementsName());
+      stmt.setTimestamp(3, achievements.getDateEarned());
       int result = stmt.executeUpdate();
       return result > 0;
     } catch (SQLException e) {
@@ -186,25 +186,25 @@ public class RunningAppDataModel {
      * Retrieves all achievements for a user from the database.
      * 
      * @param username The username of the user.
-     * @return A list of Achievement objects.
+     * @return A list of Achievements objects.
      */
-  public List<Achievement> getAchievements(String username) {
-    List<Achievement> achievements = new ArrayList<>();
+  public List<Achievements> getAchievements(String username) {
+    List<Achievements> achievementList = new ArrayList<>();
     String query = "SELECT * FROM Achievements WHERE username = ?";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, username);
       ResultSet rs = stmt.executeQuery();
       while (rs.next()) {
-        Achievement achievement = new Achievement(
+        Achievements achievements = new Achievements(
           rs.getString("username"),
-          rs.getString("achievement_name"),
+          rs.getString("achievements_name"),
           rs.getTimestamp("date_earned")
         );
-        achievements.add(achievement);
+        achievementList.add(achievements);
       }
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    return achievements;
+    return achievementList;
   } // Other methods for updating, deleting, and retrieving data can be added as needed.
 }
