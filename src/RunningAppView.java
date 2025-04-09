@@ -1,20 +1,19 @@
 import java.util.List;
 
-//everything commented out, copied for reference
 /**
  * This class is a view class that provides methods to display various
- * movie-related information.
+ * running-related information.
  */
-/**
-public class MovieView {
+
+public class RunningAppView {
   private static final int LINE_WIDTH = 68;
-*/
+
   /**
-   * Returns the menu text for the movie application.
+   * Returns the menu text for the running application.
    *
    * @return the menu text as a String
    */
-/**
+
   public static String getMenuText() {
     return "1. [Easy: Sammi Liu, Marcus Robertson] List all routes\n"
         + "2. [Easy: Alan perez, Ashley Pupkin] List the friends of a user\n"
@@ -25,16 +24,15 @@ public class MovieView {
         + "0. Exit\n" + "Enter your choice: ";
   }
 
-  public static void displayInvalidCustomerMsg() {
-    System.out.printf("Invalid customer ID. Ensure the customer exists in the database.\n");
+  public static void displayInvalidUserMsg() {
+    System.out.printf("Invalid user ID. Ensure the customer exists in the database.\n");
   }
-*/
+
   /**
    * Displays a list of routes with their details.
    *
    * @param routes the list of routes to display
    */
-/**
   public static void displayRoutes(List<Routes> routes) { //Sammi & Marcus
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
@@ -51,7 +49,7 @@ public class MovieView {
   *
   * @param routes the list of routes to display
   */
-/**
+
     public static void displayEndingRoutes(List<Routes> routes) { //Sammi & Marcus
         System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
         System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "endLocation", "startLocation", "routeID", "accID",
@@ -68,7 +66,7 @@ public class MovieView {
  *
  * @param routes the list of routes to display
  */
-/**
+
     public static void displayDistanceRoutes(List<Routes> routes) { //Sammi & Marcus
         System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
         System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
@@ -79,13 +77,13 @@ public class MovieView {
     }
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
  }
-*/
+
   /**
    * Displays a list of studios with their details.
    *
    * @param studios the list of studios to display
    */
-/**
+
   public static void displayFriends(List<Studio> studios) {
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-24s %10s %32s\n", "Name", "Address ID", "President Certification Number");
@@ -95,14 +93,14 @@ public class MovieView {
     }
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
-*/
+
 
   /**
    * Displays a list of customer transactions with their details.
    *
    * @param transactions the list of customer transactions to display
    */
-/**
+
   public static void displayStartingRoutes(List<CustomerTransaction> transactions) {
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-9s %16s %20s %10s %9s\n", "Trans No", "Customer ID", "Customer Name",
@@ -114,14 +112,13 @@ public class MovieView {
     }
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
-*/
+
   /**
    * Displays the customer invoice with its details.
    *
    * @param invoice the invoice to display
    */
 
-/**
   public static void displayOrderedRoutes(Invoice invoice) {
     if (invoice == null || invoice.isEmpty()) {
       System.out.printf("No invoice found for the transaction number or the customer.\n");
@@ -146,11 +143,4 @@ public class MovieView {
     System.out.printf("Invoice Total: %52.2f\n", invoice.getTotal());
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
-*/
-
-
-/**
-
-
 }
-*/
