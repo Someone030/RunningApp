@@ -34,10 +34,14 @@ public class RunningAppView {
    * @param routes the list of routes to display
    */
   public static void displayRoutes(List<Routes> routes) { //Sammi & Marcus
+    if (routes == null || routes.isEmpty()) {
+        System.out.println("No routes to display.");
+        return;
+    }
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
         "location", "distancePreference");
-    for (Routes route : routes) {
+    for (Routes route: routes) {
       System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getStartLocation(), route.getEndLocation(),
           route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
     }
@@ -67,16 +71,16 @@ public class RunningAppView {
  * @param routes the list of routes to display
  */
 
-    public static void displayDistanceRoutes(List<Double> distances) { //Sammi & Marcus
-        System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-        System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
-            "location", "distancePreference");
-    for (Routes route : routes) {
-        System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getStartLocation(), route.getStartLocation(),
-            route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
+  public static void displayDistanceRoutes(List<Double> distances) { //Sammi & Marcus
+    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+    System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
+                      "location", "distancePreference");
+    for (Double distance : distances) {
+      System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getStartLocation(), route.getStartLocation(),
+                        route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
     }
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
- }
+  }
 
   public static void sayGoodbye() {
     System.out.println("Goodbye!");
