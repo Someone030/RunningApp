@@ -74,7 +74,7 @@ public class RunningAppController {
     System.out.print("Enter the location where the routes end: ");
     String location = in.next();
     //get routes that end at the specified location
-    List<Route> routes = RunningAppDataModel.getRoutesEndingAtLocation(connection, location);
+    List<Routes> routes = RunningAppDataModel.getRoutesEndingAtLocation(connection, location);
     RunningAppView.displayEndingRoutes(routes);  // Display the routes that end at the location
   }
 
@@ -87,7 +87,7 @@ public class RunningAppController {
   }
 
   private static void orderRoutesByDistance(Connection connection, String accID) throws SQLException {
-    List<Route> routes = RunningAppDataModel.getRoutes(connection, accID);
+    List<Routes> routes = RunningAppDataModel.getRoutes(connection, accID);
     
     // Sort the liked routes based on distance from shortest to longest
     routes.sort((route1, route2) -> Double.compare(route1.getDistance(), route2.getDistance()));
