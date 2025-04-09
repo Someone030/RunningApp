@@ -16,10 +16,12 @@ public class MovieView {
    */
 /**
   public static String getMenuText() {
-    return "1. [Easy] List all movies\n" + "2. [Easy] List all studios\n"
-        + "3. [Not Very Hard] List Amblin studios\n"
-        + "4. [Very Hard] List customer transaction summary\n"
-        + "5. [Very Very Hard] Print customer invoice\n" + "6. [Hardest] Order movie media\n"
+    return "1. [Easy: Sammi Liu, Marcus Robertson] List all routes\n"
+        + "2. [Easy: Alan perez, Ashley Pupkin] List the friends of a user\n"
+        + "3. [Hard: Sammi Liu, Marcus Robertson] List the routes that end at location x\n"
+        + "4. [Hard: Alan Perez, Ashley Pupkin] List routes starting at location y\n"
+        + "5. [Hard: Alan Perez, Ashley Pupkin] Print the total distance ran on a certain day\n"
+        + "6. [Hardest: Sammi Liu, Marcus Robertson] Order the liked routes from shortest to longest\n"
         + "0. Exit\n" + "Enter your choice: ";
   }
 
@@ -28,21 +30,55 @@ public class MovieView {
   }
 */
   /**
-   * Displays a list of movies with their details.
+   * Displays a list of routes with their details.
    *
-   * @param movies the list of movies to display
+   * @param routes the list of routes to display
    */
 /**
-  public static void displayMovies(List<Movie> movies) {
+  public static void displayRoutes(List<Routes> routes) { //Sammi & Marcus
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-    System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "Title", "Year", "Len", "Genre",
-        "Studio", "Producer");
-    for (Movie movie : movies) {
-      System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", movie.getTitle(), movie.getYear(),
-          movie.getLength(), movie.getGenre(), movie.getStudioName(), movie.getProducerCertNum());
+    System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
+        "location", "distancePreference");
+    for (Routes route : routes) {
+      System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getStartLocation(), route.getEndLocation(),
+          route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
     }
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
+
+ /**
+  * Displays a list of routes with a specific ending location.
+  *
+  * @param routes the list of routes to display
+  */
+/**
+    public static void displayEndingRoutes(List<Routes> routes) { //Sammi & Marcus
+        System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+        System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "endLocation", "startLocation", "routeID", "accID",
+            "location", "distancePreference");
+        for (Routes route : routes) {
+            System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getEndLocation(), route.getStartLocation(),
+                route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
+    }
+    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+ }
+
+ /**
+ * Displays a list of routes with a specific ending location.
+ *
+ * @param routes the list of routes to display
+ */
+/**
+    public static void displayDistanceRoutes(List<Routes> routes) { //Sammi & Marcus
+        System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+        System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
+            "location", "distancePreference");
+    for (Routes route : routes) {
+        System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getStartLocation(), route.getStartLocation(),
+            route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
+    }
+    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+ }
 */
   /**
    * Displays a list of studios with their details.
@@ -50,7 +86,7 @@ public class MovieView {
    * @param studios the list of studios to display
    */
 /**
-  public static void displayStudios(List<Studio> studios) {
+  public static void displayFriends(List<Studio> studios) {
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-24s %10s %32s\n", "Name", "Address ID", "President Certification Number");
     for (Studio studio : studios) {
@@ -68,7 +104,7 @@ public class MovieView {
    * @param movieItems the list of movie items to display
    */
 /**
-  public static void displayMovieItems(List<MovieItem> movieItems) {
+  public static void displayEndingRoutes(List<MovieItem> movieItems) { //Sammi & Marcus
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-3s %-8s %-22s %4s %6s %8s %10s\n", "Row", "Item", "Title", "Year",
         "Medium", "QTY", "Item Price");
@@ -88,7 +124,7 @@ public class MovieView {
    * @param transactions the list of customer transactions to display
    */
 /**
-  public static void displayTransactions(List<CustomerTransaction> transactions) {
+  public static void displayStartingRoutes(List<CustomerTransaction> transactions) {
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
     System.out.printf("%-9s %16s %20s %10s %9s\n", "Trans No", "Customer ID", "Customer Name",
         "Date", "Total");
@@ -107,7 +143,7 @@ public class MovieView {
    */
 
 /**
-  public static void displayCustomerInvoice(Invoice invoice) {
+  public static void displayOrderedRoutes(Invoice invoice) {
     if (invoice == null || invoice.isEmpty()) {
       System.out.printf("No invoice found for the transaction number or the customer.\n");
       return;
@@ -139,7 +175,7 @@ public class MovieView {
    */
 
 /**
-  public static void displayItemOrderMenu(List<MovieItem> movieItems) {
+  public static void displayDistanceRoutes(List<MovieItem> movieItems) { //Sammi & Marcus
     MovieView.displayMovieItems(movieItems);
     System.out.printf("-1 Cancel order\n");
     System.out.printf(" 0 Confirm order\n");
