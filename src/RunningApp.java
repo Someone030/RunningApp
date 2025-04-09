@@ -9,60 +9,55 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-//ALL OF THIS IS COPY AND PASTED FOR REFERENCE
-
 /**
  * The RunApp class is the main entry point for the application.
  * It sets up logging, establishes a database connection, and starts the controller loop.
  */
-/**
-  public class MovieApp {
-  private static final String LOG_FILE = "MovieApp.log";
-  private static final Logger logger = Logger.getLogger(MovieApp.class.getName());
+public class RunApp {
+  private static final String LOG_FILE = "RunApp.log";
+  private static final Logger logger = Logger.getLogger(RunApp.class.getName());
 
   private static final String DB_CONFIG_FILE_KEY = "db.config.file";
   private static final String DB_CONFIG_FILE = "db.properties";
 
-  private static final String STORE_NO = "100001";
+  private static final String DEFAULT_USER_ID = "1";
 
-  private static final String CUSTOMER_ID_KEY = "customer.id";
-  private static final String CUSTOMER_ID = "C12345678";
-*/
-  /**
-   * The main method is the entry point of the application.
-   * It sets up logging and establishes a database connection.
-   *
-   * @param args Command line arguments (unused).
-   */
-/** 
-   public static void main(String[] args) {
+  private static final String USER_ID_KEY = "user.id";
+
+/**
+ * The main method is the entry point of the application.
+ * It sets up logging and establishes a database connection.
+ * 
+ * @param args Command line arguments (unused).
+ */
+  public static void main(String[] args) {
     try (AutoclosableLoggerFileHandler logFileHandler =
         new AutoclosableLoggerFileHandler(LOG_FILE, false)) {
-      setup_logger(logFileHandler, logger);
+      setupLogger(logFileHandler, logger);
 
       String dbConfigFile = System.getProperty(DB_CONFIG_FILE_KEY);
       if (dbConfigFile == null) {
         dbConfigFile = DB_CONFIG_FILE;
       }
       logger.log(Level.FINE, "dbConfigFile => " + dbConfigFile);
-      String customerId = System.getProperty(CUSTOMER_ID_KEY);
-      if (customerId == null) {
-        customerId = CUSTOMER_ID;
+
+      String userId = System.getProperty(USER_ID_KEY);
+      if (userId == null) {
+        userId = DEFAULT_USER_ID;
       }
 
       try (Connection connection = getDbConnection(dbConfigFile)) {
-        MovieController.controllerLoop(connection, STORE_NO, customerId);
+        RunningAppController.controllerLoop(connection, userId);
       } catch (SQLException e) {
-        MovieView.displaySystemErrorMsg(e);
+        RunningAppView.displaySystemErrorMsg(e);
         logger.log(Level.SEVERE, "Error operating on MariaDB: " + e.getMessage());
       }
     } catch (IOException e) {
-      MovieView.displayLogErrorMsg(e);
+      RunningAppView.displayLogErrorMsg(e);
     }
   }
-
-
-  private static void setup_logger(AutoclosableLoggerFileHandler fileHandler, Logger logger)
+  
+  private static void setupLogger(AutoclosableLoggerFileHandler fileHandler, Logger logger)
       throws IOException {
     Logger rootLogger = Logger.getLogger("");
     for (Handler handler : rootLogger.getHandlers()) {
@@ -77,7 +72,7 @@ import java.util.logging.SimpleFormatter;
     rootLogger.setLevel(Level.ALL);
     logger.setLevel(Level.ALL);
   }
-
+  
   private static Properties loadDbProperties(String dbConfigFile) {
     Properties properties = new Properties();
 
@@ -88,7 +83,7 @@ import java.util.logging.SimpleFormatter;
     }
     return properties;
   }
-
+  
   private static Connection getDbConnection(String dbConfigFile) throws SQLException {
     Properties properties = loadDbProperties(dbConfigFile);
     String url = "jdbc:mariadb://" + properties.getProperty("host") + ":"
@@ -97,10 +92,8 @@ import java.util.logging.SimpleFormatter;
     String user = properties.getProperty("user");
     String password = properties.getProperty("password");
 
-    Connection connection = null;
-    connection = DriverManager.getConnection(url, user, password);
+    Connection connection = DriverManager.getConnection(url, user, password);
     logger.info("Connected to MariaDB successfully!");
     return connection;
   }
 }
-*/
