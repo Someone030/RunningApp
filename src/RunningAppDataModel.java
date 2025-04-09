@@ -304,7 +304,7 @@ public class RunningAppDataModel {
       return routes;
     }
     public static List<String> getFriends(Connection connection, String accountID) throws SQLException {
-      String query = "SELECT friends FROM accounts WHERE accountID = ?";
+      String query = "SELECT friends FROM account WHERE accountID = ?";
       List<String> friendList = new ArrayList<>();
   
       try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -364,7 +364,7 @@ public class RunningAppDataModel {
   }
   public static Account getUserById(Connection connection, String accountID) throws SQLException {
       // SQL query to get user by their account ID
-      String query = "SELECT * FROM accounts WHERE accountID = ?";
+      String query = "SELECT * FROM account WHERE accountID = ?";
   
       try (PreparedStatement stmt = connection.prepareStatement(query)) {
           stmt.setString(1, accountID);  // Set the accountID parameter
