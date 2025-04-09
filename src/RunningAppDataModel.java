@@ -254,7 +254,7 @@ public class RunningAppDataModel {
      */
     public static List<SavedRoutes> getLikedRoutes(Connection connection, String accoID) throws SQLException {
         // List to store the liked routes
-        List<SavedRoute> likedRoutes = new ArrayList<>();
+        List<SavedRoutes> likedRoutes = new ArrayList<>();
         
         // SQL query to get liked routes based on user ID
         String query = "SELECT startLoc, endLoc, routesID, savedRouteID, accoID, savedAt FROM savedRoutes WHERE accoID = ?";
