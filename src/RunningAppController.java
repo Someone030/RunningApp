@@ -31,7 +31,7 @@ public class RunningAppController {
       action = in.nextInt();
       switch (action) {
         case 1:
-          listAllLikedRoutes(connection, userId);
+          listAllRoutes(connection, userId);
           break;
         case 2:
           listFriendsOfUser(connection, userId);
@@ -43,7 +43,7 @@ public class RunningAppController {
           listRoutesStartingAtLocation(connection);
           break;
         case 5:
-          orderLikedRoutesByDistance(connection, userId);
+          orderRoutesByDistance(connection, userId);
           break;
         case 6:
           printTotalDistanceRanOnDay(connection, userId);
@@ -60,9 +60,9 @@ public class RunningAppController {
   //note to myself cz I'm getting confused :D
   //get all routes would be in the running app data model file while the display routes is in the view file
   
-  private static void listAllLikedRoutes(Connection connection, String userId) throws SQLException {
-    List<Route> likedRoutes = RunningAppDataModel.getLikedRoutes(connection, userId);
-    RunningAppView.displayRoutes(likedRoutes);
+  private static void listAllRoutes(Connection connection, String accID) throws SQLException {
+    List<Route> routes = RunningAppDataModel.getRoutes(connection, accID);
+    RunningAppView.displayRoutes(routes);
   }
 
   private static void listFriendsOfUser(Connection connection, String userId) throws SQLException {
@@ -86,14 +86,14 @@ public class RunningAppController {
     RunningAppView.displayStartingRoutes(routes);  // Display the routes that start at the location
   }
 
-  private static void orderLikedRoutesByDistance(Connection connection, String userId) throws SQLException {
-    List<Route> likedRoutes = RunningAppDataModel.getLikedRoutes(connection, userId);
+  private static void orderRoutesByDistance(Connection connection, String accID) throws SQLException {
+    List<Route> routes = RunningAppDataModel.getRoutes(connection, accID);
     
     // Sort the liked routes based on distance from shortest to longest
-    likedRoutes.sort((route1, route2) -> Double.compare(route1.getDistance(), route2.getDistance()));
+    routes.sort((route1, route2) -> Double.compare(route1.getDistance(), route2.getDistance()));
     
     // Display the sorted list of routes
-    RunningAppView.displayOrderedRoutes(likedRoutes);
+    RunningAppView.displayOrderedRoutes(routes);
   }
 
   private static void printTotalDistanceRanOnDay(Connection connection, String accoID) throws SQLException {
