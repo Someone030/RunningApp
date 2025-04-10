@@ -306,7 +306,7 @@ public class RunningAppDataModel {
     public static List<String> getFriends(Connection connection, String accountID) throws SQLException {
       String query = "SELECT friends FROM account WHERE accountID = ?";
       List<String> friendList = new ArrayList<>();
-  
+
       try (PreparedStatement stmt = connection.prepareStatement(query)) {
           stmt.setString(1, accountID);
           try (ResultSet rs = stmt.executeQuery()) {
@@ -321,7 +321,7 @@ public class RunningAppDataModel {
   }
   public static List<Routes> getRoutesStartingAtLocation(Connection connection, String location) throws SQLException {
     List<Routes> routes = new ArrayList<>();
-    String query = "SELECT * FROM routes WHERE startLoc = ?";
+    String query = "SELECT * FROM routes WHERE startLocation = ?";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
         stmt.setString(1, location);
         try (ResultSet rs = stmt.executeQuery()) {

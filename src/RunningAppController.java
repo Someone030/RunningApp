@@ -29,6 +29,7 @@ public class RunningAppController {
     do {
       System.out.print(RunningAppView.getMenuText());
       action = in.nextInt();
+      in.nextLine();
       switch (action) {
         case 1:
           listAllRoutes(connection, userId);
@@ -72,8 +73,7 @@ public class RunningAppController {
 
   private static void listRoutesEndingAtLocation(Connection connection) throws SQLException {
     System.out.print("Enter the location where the routes end: ");
-    in.next();
-    String location = in.nextLine();
+    String location = in.nextLine().trim();
     //get routes that end at the specified location
     List<Routes> routes = RunningAppDataModel.getRoutesEndingAtLocation(connection, location);
     RunningAppView.displayEndingRoutes(routes);  // Display the routes that end at the location
@@ -81,8 +81,7 @@ public class RunningAppController {
 
   private static void listRoutesStartingAtLocation(Connection connection) throws SQLException {
     System.out.print("Enter the location where the routes start: ");
-    in.next();
-    String location = in.next();
+    String location = in.next().trim();
     //get routes that start at the specified location
     List<Routes> routes = RunningAppDataModel.getRoutesStartingAtLocation(connection, location);
     RunningAppView.displayStartingRoutes(routes);  // Display the routes that start at the location
