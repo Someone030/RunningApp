@@ -72,7 +72,8 @@ public class RunningAppController {
 
   private static void listRoutesEndingAtLocation(Connection connection) throws SQLException {
     System.out.print("Enter the location where the routes end: ");
-    String location = in.next();
+    in.next();
+    String location = in.nextLine();
     //get routes that end at the specified location
     List<Routes> routes = RunningAppDataModel.getRoutesEndingAtLocation(connection, location);
     RunningAppView.displayEndingRoutes(routes);  // Display the routes that end at the location
@@ -80,6 +81,7 @@ public class RunningAppController {
 
   private static void listRoutesStartingAtLocation(Connection connection) throws SQLException {
     System.out.print("Enter the location where the routes start: ");
+    in.next();
     String location = in.next();
     //get routes that start at the specified location
     List<Routes> routes = RunningAppDataModel.getRoutesStartingAtLocation(connection, location);

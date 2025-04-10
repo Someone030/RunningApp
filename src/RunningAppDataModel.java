@@ -326,10 +326,10 @@ public class RunningAppDataModel {
         stmt.setString(1, location);
         try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                String startLoc = rs.getString("startLoc");
-                String endLoc = rs.getString("endLoc");
+                String startLoc = rs.getString("startLocation");
+                String endLoc = rs.getString("endLocation");
                 String routeID = rs.getString("routeID");
-                String accoID = rs.getString("accoID");
+                String accoID = rs.getString("accID");
                 String routeLocation = rs.getString("location");
                 String distancePreference = rs.getString("distancePreference");
               
@@ -348,10 +348,10 @@ public class RunningAppDataModel {
         stmt.setString(1, location);
         try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                String startLoc = rs.getString("startLoc");
-                String endLoc = rs.getString("endLoc");
+                String startLoc = rs.getString("startLocation");
+                String endLoc = rs.getString("endLocation");
                 String routeID = rs.getString("routeID");
-                String accoID = rs.getString("accoID");
+                String accoID = rs.getString("accID");
                 String routeLocation = rs.getString("location");
                 String distancePreference = rs.getString("distancePreference");
 

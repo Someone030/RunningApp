@@ -62,13 +62,19 @@ public class RunningAppView {
   */
 
     public static void displayEndingRoutes(List<Routes> routes) { //Sammi & Marcus
+        final int LINE_WIDTH = 100;
+
         System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-        System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "endLocation", "startLocation", "routeID", "accID",
-            "location", "distancePreference");
+        System.out.printf("%-25s %-25s %-8s %-6s %-20s %-10s\n",
+                "endLocation", "startLocation", "routeID", "accID", "location", "distancePreference");
+        
         for (Routes route : routes) {
-            System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getEndLocation(), route.getStartLocation(),
-                route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
+            System.out.printf("%-25s %-25s %-8s %-6s %-20s %-10s\n",
+                    route.getEndLocation(), route.getStartLocation(),
+                    route.getRouteID(), route.getAccID(),
+                    route.getLocation(), route.getDistancePreference());
     }
+
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
  }
 
@@ -129,13 +135,19 @@ public class RunningAppView {
    */
   
   public static void displayStartingRoutes(List<Routes> routes) { //Sammi & Marcus
-    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
-    System.out.printf("%-22s %-4s %-3s %-5s %-20s %-9s\n", "startLocation", "endLocation", "routeID", "accID",
-        "location", "distancePreference");
+      final int LINE_WIDTH = 100;
+
+      System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+      System.out.printf("%-25s %-25s %-8s %-6s %-20s %-10s\n",
+            "startLocation", "endLocation", "routeID", "accID", "location", "distancePreference");
+
     for (Routes route : routes) {
-      System.out.printf("%-22s %-4s %3s %5s %-20s %-9s\n", route.getStartLocation(), route.getEndLocation(),
-          route.getRouteID(), route.getAccID(), route.getLocation(), route.getDistancePreference());
+      System.out.printf("%-25s %-25s %-8s %-6s %-20s %-10s\n",
+              route.getStartLocation(), route.getEndLocation(),
+              route.getRouteID(), route.getAccID(),
+              route.getLocation(), route.getDistancePreference());
     }
+    
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
 
