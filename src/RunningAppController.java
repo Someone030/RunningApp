@@ -81,7 +81,7 @@ public class RunningAppController {
 
   private static void listRoutesStartingAtLocation(Connection connection) throws SQLException {
     System.out.print("Enter the location where the routes start: ");
-    String location = in.next().trim();
+    String location = in.nextLine().trim();
     //get routes that start at the specified location
     List<Routes> routes = RunningAppDataModel.getRoutesStartingAtLocation(connection, location);
     RunningAppView.displayStartingRoutes(routes);  // Display the routes that start at the location
