@@ -186,6 +186,30 @@ public class RunningAppDataModel {
       return false;
     }
   }
+public static List<Achievements> getAllAchievements(Connection connection) throws SQLException{
+    List<Achievements> ach = new ArrayList<Achievements>();
+    String sql = "SELECT * FROM achievements";
+    PreparedStatement pstmt = connection.prepareStatement(sql);
+    ResultSet resultSet = pstmt.executeQuery();
+      while (resultSet.next()) {
+        ach.add(new Achievements(resultSet.getString("runStreak"), resultSet.getString("goals")));
+      }
+    return ach;
+  }
+/**
+*
+*/
+    public static List<SavedRoutes> sortedSavedRoutes(Connection connection) throws SQLException{
+        List<SavedRoutes> sr = new ArrayList<SavedRoutes>();
+        String sql = "SELECT * FROM savedRoutes ORDER BY savedAt ASC;";
+
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        ResultSet resultSet = pstmt.executeQuery();
+        while(resultSet.next()){
+            sr.add(new SavedRoutes(resultSet.getString("startloc"), resultSet.getString("endLoc"), resultSet.getString("routesID"), resultSet.getString("save>
+        }
+        return sr;
+    }
 
     /**
      * Retrieves all achievements for a user from the database.
