@@ -29,7 +29,6 @@ public class RunningAppController {
     do {
       System.out.print(RunningAppView.getMenuText());
       action = in.nextInt();
-      in.nextLine();
       switch (action) {
         case 1:
           listAllRoutes(connection, userId);
@@ -38,17 +37,23 @@ public class RunningAppController {
           listFriendsOfUser(connection, userId);
           break;
         case 3:
-          listRoutesEndingAtLocation(connection);
+          listAchievements(connection, userId);
           break;
         case 4:
-          listRoutesStartingAtLocation(connection);
+          listSortedSavedRoutes(connection);
           break;
         case 5:
-          orderRoutesByDistance(connection, userId);
+          listRoutesEndingAtLocation(connection);
           break;
         case 6:
-          printTotalDistanceRanOnDay(connection, userId);
+          listRoutesStartingAtLocation(connection);
           break;
+        case 7:
+          orderRoutesByDistance(connection, userId);
+          break;
+        case 8:
+         printTotalDistanceRanOnDay(connection, userId);
+         break;
         case 0:
           RunningAppView.sayGoodbye();
           break;
@@ -70,7 +75,14 @@ public class RunningAppController {
     List<String> friends = RunningAppDataModel.getFriends(connection, accountID);
     RunningAppView.displayFriends(friends);
   }
-
+  private static void listAchievements(Connection connection, String acctID) throws SQLException{
+    List<Achievements> a = RunningAppDataModel.getAllAchievements(connection);
+    RunningAppView.printAllAchievements(a);
+  }
+  private static void listSortedSavedRoutes(Connection connection) throws SQLException{
+        List<SavedRoutes> sr = RunningAppDataModel.sortedSavedRoutes(connection);
+        RunningAppView.listSortedRoutes(sr);
+    }
   private static void listRoutesEndingAtLocation(Connection connection) throws SQLException {
     System.out.print("Enter the location where the routes end: ");
     String location = in.nextLine().trim();
