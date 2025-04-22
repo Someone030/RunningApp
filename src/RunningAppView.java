@@ -17,11 +17,14 @@ public class RunningAppView {
   public static String getMenuText() {
     return "1. [Easy: Sammi Liu, Marcus Robertson] List all routes\n"
         + "2. [Easy: Sammi Liu, Marcus Robertson] List the friends of a user\n"
-        + "3. [Hard: Sammi Liu, Marcus Robertson] List the routes that end at location x\n"
-        + "4. [Hard: Sammi Liu, Marcus Robertson] List routes starting at location y\n"
-        + "5. [Hard: Sammi Liu, Marcus Robertson] Print the total distance ran on a certain day\n"
-        + "6. [Hardest: Sammi Liu, Marcus Robertson] Order the liked routes from shortest to longest\n"
+        + "3. [Easy: Ashley Pupkin] Print all achievements\n"
+        + "4. [Hard: Ashley Pupkin] Sort saved routes by date added\n"
+        + "5. [Hard: Sammi Liu, Marcus Robertson] List the routes that end at location x\n"
+        + "6. [Hard: Sammi Liu, Marcus Robertson] List routes starting at location y\n"
+        + "7. [Hard: Sammi Liu, Marcus Robertson] Print the total distance ran on a certain day\n"
+        + "8. [Hardest: Sammi Liu, Marcus Robertson] Order the liked routes from shortest to longest\n"
         + "0. Exit\n" + "Enter your choice: ";
+
   }
 
   public static void displayInvalidUserMsg() {
@@ -54,6 +57,28 @@ public class RunningAppView {
 
       System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
+  //prints all achievements
+  public static void printAllAchievements(List<Achievements> ach) { //Ashley
+   System.out.printf("%s\n", "-".repeat(100));
+   System.out.printf("%s %22s\n", "Run Streak", "Goal");
+   System.out.printf("%s\n", "-".repeat(100));
+
+   for(Achievements ac : ach){
+     System.out.printf("%s %17s %17s\n", ac.getRunStreak(), "|", ac.getGoals());
+   }
+   System.out.printf("%s\n", "-".repeat(100));
+  }
+//prints sorted saved routes
+    public static void listSortedRoutes(List<SavedRoutes> sr){//Ashley
+        System.out.printf("%s\n", "-".repeat(100));
+        System.out.printf("%s %20s %20s\n", "Start Location", "End Location", "Saved At");
+        System.out.printf("%s\n", "-".repeat(100));
+        for (SavedRoutes route : sr) {
+            System.out.printf("%s %20s %25s\n", route.getStartLoc(), route.getEndLoc(), route.getSavedAt());
+        }
+        System.out.printf("%s\n", "-".repeat(100));
+    }
+
 
  /**
   * Displays a list of routes with a specific ending location.
