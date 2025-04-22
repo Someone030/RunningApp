@@ -29,6 +29,7 @@ public class RunningAppController {
     do {
       System.out.print(RunningAppView.getMenuText());
       action = in.nextInt();
+      in.nextLine();
       switch (action) {
         case 1:
           listAllRoutes(connection, userId);

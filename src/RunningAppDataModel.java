@@ -206,7 +206,7 @@ public static List<Achievements> getAllAchievements(Connection connection) throw
         PreparedStatement pstmt = connection.prepareStatement(sql);
         ResultSet resultSet = pstmt.executeQuery();
         while(resultSet.next()){
-            sr.add(new SavedRoutes(resultSet.getString("startloc"), resultSet.getString("endLoc"), resultSet.getString("routesID"), resultSet.getString("save>
+            sr.add(new SavedRoutes(resultSet.getString("startloc"), resultSet.getString("endLoc"), resultSet.getString("routesID"), resultSet.getString("savedRouteID"), resultSet.getString("accoID"), resultSet.getTimestamp("SavedAt")));
         }
         return sr;
     }
