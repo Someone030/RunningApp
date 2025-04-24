@@ -55,6 +55,9 @@ public class RunningAppController {
         case 8:
          printTotalDistanceRanOnDay(connection, userId);
          break;
+          case 9:
+         totalMiles(connection);
+         break;
         case 0:
           RunningAppView.sayGoodbye();
           break;
@@ -80,6 +83,10 @@ public class RunningAppController {
     List<Achievements> a = RunningAppDataModel.getAllAchievements(connection);
     RunningAppView.printAllAchievements(a);
   }
+  private static void totalMiles(Connection connection) throws SQLException{
+   double miles = RunningAppDataModel.totalMilesRan(connection);
+   RunningAppView.displayTotalMiles(miles);
+ }
   private static void listSortedSavedRoutes(Connection connection) throws SQLException{
         List<SavedRoutes> sr = RunningAppDataModel.sortedSavedRoutes(connection);
         RunningAppView.listSortedRoutes(sr);
