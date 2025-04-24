@@ -23,6 +23,7 @@ public class RunningAppView {
         + "6. [Hard: Sammi Liu, Marcus Robertson] List routes starting at location y\n"
         + "7. [Hard: Sammi Liu, Marcus Robertson] Print the total distance ran on a certain day\n"
         + "8. [Hardest: Sammi Liu, Marcus Robertson] Order the liked routes from shortest to longest\n"
+        + "9. [Hardest: Ashley Pupkin] Print total miles ran\n"
         + "0. Exit\n" + "Enter your choice: ";
 
   }
@@ -79,7 +80,16 @@ public class RunningAppView {
         System.out.printf("%s\n", "-".repeat(100));
     }
 
-
+/**
+* Displays the total amount of miles ran 
+ */
+public static void displayTotalMiles(double miles){//Ashley
+        System.out.printf("%s\n", "-".repeat(100));
+        System.out.printf("%-100s%n", "Total Miles Ran");
+        System.out.printf("%s\n", "-".repeat(100));
+        System.out.printf("Total: %.2f miles%n", miles);
+        System.out.printf("%s\n", "-".repeat(100));
+    }
  /**
   * Displays a list of routes with a specific ending location.
   *
