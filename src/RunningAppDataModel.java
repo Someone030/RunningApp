@@ -189,7 +189,7 @@ public class RunningAppDataModel {
   /**
 *returns the total miles the user ran
 */
-     public static double totalMilesRan(Connection connection) throws SQLExc>
+     public static double totalMilesRan(Connection connection) throws SQLException{
         double totalMiles = 0;
         String sql = "SELECT SUM(distancePreference) FROM routes;";
         PreparedStatement pstmt = connection.prepareStatement(sql);
