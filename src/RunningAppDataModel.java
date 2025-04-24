@@ -186,6 +186,20 @@ public class RunningAppDataModel {
       return false;
     }
   }
+  /**
+*returns the total miles the user ran
+*/
+     public static double totalMilesRan(Connection connection) throws SQLExc>
+        double totalMiles = 0;
+        String sql = "SELECT SUM(distancePreference) FROM routes;";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        ResultSet resultSet = pstmt.executeQuery();
+        if (resultSet.next()) {
+            totalMiles = resultSet.getDouble(1);
+        }
+
+        return totalMiles;
+    }
 public static List<Achievements> getAllAchievements(Connection connection) throws SQLException{
     List<Achievements> ach = new ArrayList<Achievements>();
     String sql = "SELECT * FROM achievements";
