@@ -7,6 +7,7 @@ import java.util.List;
 import java.sql.Timestamp;
 import java.util.Map;
 import java.util.HashMap;
+
 /**
  * This class provides methods to interact with the Running App database, Along with a few other classes,
  * this class constitutes the "model" of the application.
@@ -29,7 +30,7 @@ public class RunningAppDataModel {
      * @param user The User object containing user details.
      * @return true if the user was successfully created, false otherwise.
      */
-   public boolean createUser(User user) {
+  public boolean createUser(User user) {
     String query = "INSERT INTO usersT (username, password, icon) VALUES (?, ?, ?)";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, user.getUsername());
@@ -49,7 +50,7 @@ public class RunningAppDataModel {
      * @param username The username of the user to retrieve.
      * @return The User object containing user details, or null if the user does not exist.
      */
- public User getUser(String username) {
+  public User getUser(String username) {
     String query = "SELECT * FROM usersT WHERE username = ?";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, username);
@@ -64,16 +65,16 @@ public class RunningAppDataModel {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    return null;
+return null;
   }
-
+  
   /**
      * Creates a new route in the database.
      * 
      * @param route The Route object containing route details.
      * @return true if the route was successfully created, false otherwise.
      */
- public boolean createRoute(Routes route) {
+  public boolean createRoute(Routes route) {
     String query = "INSERT INTO routesT (startLocation, endLocation, route_id, acc_id, distance_pref) VALUES (?, ?, ?, ?, ?)";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, route.getStartLocation());
@@ -95,7 +96,7 @@ public class RunningAppDataModel {
      * 
      * @return A list of Routes objects.
      */
- public List<Routes> getAllRoutes(String accID) {
+  public List<Routes> getAllRoutes(String accID) {
     List<Routes> routes = new ArrayList<>();
     String query = "SELECT * FROM routesT WHERE accID = ?";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -123,7 +124,7 @@ public class RunningAppDataModel {
      * @return true if the saved route was successfully created, false otherwise.
      */
   public boolean saveRoute(SavedRoutes savedRoute) {
-    String query = "INSERT INTO savedRoutesT (start_loc, end_loc, routes_id, saved_route_id, acco_id, date_saved) VALUES (?, ?, ?, ?, ?, ?)";
+    String query = "INSERT INTO savedRoutesT (start_loc, end_loc, routes_id, saved_route_id, acco_id, date_saved) VALUES (?, ?, ?, ?, ?, ?, ?)";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, savedRoute.getStartLoc());
       stmt.setString(2, savedRoute.getEndLoc());
@@ -145,7 +146,7 @@ public class RunningAppDataModel {
      * @param username The username of the user.
      * @return A list of SavedRoutes objects.
      */
-    public List<SavedRoutes> getSavedRoutes(String accoID) {
+  public List<SavedRoutes> getSavedRoutes(String accoID) {
     List<SavedRoutes> savedRoutes = new ArrayList<>();
     String query = "SELECT * FROM savedRoutesT WHERE accoID = ?";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -186,10 +187,20 @@ public class RunningAppDataModel {
       return false;
     }
   }
-  /**
+  public static List<Achievements> getAllAchievements(Connection connection) throws SQLException{
+    List<Achievements> ach = new ArrayList<Achievements>();
+    String sql = "SELECT * FROM achievementsT";
+    PreparedStatement pstmt = connection.prepareStatement(sql);
+ResultSet resultSet = pstmt.executeQuery();
+      while (resultSet.next()) {
+        ach.add(new Achievements(resultSet.getString("runStreak"), resultSet.getString("goals")));
+      }
+    return ach;
+  }
+/**
 *returns the total miles the user ran
 */
-      public static double totalMilesRan(Connection connection) throws SQLException{
+     public static double totalMilesRan(Connection connection) throws SQLException{
         double totalMiles = 0;
         String sql = "SELECT SUM(distancePreference) FROM routesT;";
         PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -200,6 +211,35 @@ public class RunningAppDataModel {
 
         return totalMiles;
     }
+/**
+*returns all saved routed
+*/
+/**
+*returns all saved routed
+*/
+    public static List<String> sortedSavedRoutes(Connection connection) throws SQLException{
+        List<String> sr = new ArrayList<String>();
+        String sql = "SELECT r.startLocation, r.endLocation, s.savedAt FROM routesT AS r JOIN savedRoutesT AS s ON s.routeID = r.routeID ORDER BY s.savedAt DESC;";
+
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        ResultSet resultSet = pstmt.executeQuery();
+        while(resultSet.next()){
+            String start = resultSet.getString("startLocation");
+            String end = resultSet.getString("endLocation");
+
+            String savedAt = resultSet.getTimestamp("savedAt").toString(); 
+
+            sr.add(start + "    " + end + "     " + savedAt);
+        }
+        return sr;
+    }
+    
+    /**
+     * Retrieves all achievements for a user from the database.
+     * 
+     * @param username The username of the user.
+     * @return A list of Achievements objects.
+     */
 public List<Achievements> getAchievements(String username) {
     List<Achievements> achievementList = new ArrayList<>();
     String query = "SELECT * FROM achievementsT WHERE username = ?";
@@ -218,52 +258,7 @@ public List<Achievements> getAchievements(String username) {
     }
     return achievementList;
   } 
-
 /**
-*
-*/
-    public static List<SavedRoutes> sortedSavedRoutes(Connection connection) throws SQLException{
-        List<SavedRoutes> sr = new ArrayList<SavedRoutes>();
-        String sql = "SELECT r.startLocation, r.endLocation, s.savedAt FROM routesT AS r JOIN savedRoutesT AS s ON s.routeID = r.routeID ORDER BY s.savedAt DESC;";
-
-        PreparedStatement pstmt = connection.prepareStatement(sql);
-        ResultSet resultSet = pstmt.executeQuery();
-        while(resultSet.next()){
-        String start = resultSet.getString("startLocation");
-            String end = resultSet.getString("endLocation");
-            String savedAt = resultSet.getTimestamp("savedAt").toString(); 
-
-            sr.add(start + "    " + end + "     " + savedAt);    
-        }
-        return sr;
-    }
-
-    /**
-     * Retrieves all achievements for a user from the database.
-     * 
-     * @param username The username of the user.
-     * @return A list of Achievements objects.
-     */
-  public List<Achievements> getAchievements(String username) {
-    List<Achievements> achievementList = new ArrayList<>();
-    String query = "SELECT * FROM achievementsT WHERE username = ?";
-    try (PreparedStatement stmt = connection.prepareStatement(query)) {
-      stmt.setString(1, username);
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-        Achievements achievements = new Achievements(
-          rs.getString("run_streak"),
-          rs.getString("goals")
-        );
-        achievementList.add(achievements);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return achievementList;
-  } 
-
-  /**
      * Retrieves the distances ran by a user on a specific date.
      *
      * @param connection the database connection
@@ -295,7 +290,7 @@ public List<Achievements> getAchievements(String username) {
         
         // Return the list of distances
         return distances;
-    }
+        }
   /**
      * Retrieves the liked routes of a user.
      *
@@ -304,8 +299,7 @@ public List<Achievements> getAchievements(String username) {
      * @return a list of liked routes for the given user
      * @throws SQLException if an error occurs while interacting with the database
      */
-    public static List<SavedRoutes> getLikedRoutes(Connection connection, String accoID) throws SQLException {
-        // List to store the liked routes
+     // List to store the liked routes
         List<SavedRoutes> likedRoutes = new ArrayList<>();
         
         // SQL query to get liked routes based on user ID
@@ -334,8 +328,7 @@ public List<Achievements> getAchievements(String username) {
     }
     return likedRoutes;
     }
-
-     public static List<Routes> getRoutes(Connection connection, String accID) throws SQLException {
+ public static List<Routes> getRoutes(Connection connection, String accID) throws SQLException {
       List<Routes> routes = new ArrayList<>();
       String query = "SELECT startLocation, endLocation, routeID, accID, distancePreference FROM routesT WHERE accID = ?";
       try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -356,7 +349,6 @@ public List<Achievements> getAchievements(String username) {
       }
       return routes;
     }
-
 public static Map<Integer, String> getFriends(Connection connection, String accountID) throws SQLException {
     Map<Integer, String> map = new HashMap<>();
 
@@ -376,8 +368,7 @@ public static Map<Integer, String> getFriends(Connection connection, String acco
 
     return map;
 }
-
- public static List<Routes> getRoutesStartingAtLocation(Connection connection, String location) throws SQLException {
+  public static List<Routes> getRoutesStartingAtLocation(Connection connection, String location) throws SQLException {
     List<Routes> routes = new ArrayList<>();
     String query = "SELECT * FROM routesT WHERE startLocation = ?";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -399,8 +390,7 @@ public static Map<Integer, String> getFriends(Connection connection, String acco
     return routes;
   }
 
-
-  public static List<Routes> getRoutesEndingAtLocation(Connection connection, String location) throws SQLException {
+ public static List<Routes> getRoutesEndingAtLocation(Connection connection, String location) throws SQLException {
     List<Routes> routes = new ArrayList<>();
     String query = "SELECT * FROM routesT WHERE endLocation = ?";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -421,8 +411,7 @@ public static Map<Integer, String> getFriends(Connection connection, String acco
     }
     return routes;
   }
-
-  public static Account getUserById(Connection connection, String accountID) throws SQLException {
+public static Account getUserById(Connection connection, String accountID) throws SQLException {
       // SQL query to get user by their account ID
       String query = "SELECT * FROM accountT WHERE accountID = ?";
   
@@ -461,7 +450,7 @@ public static List<String> userStreak(Connection connection) throws SQLException
 
     return list;
 }
-  /**
+/**
 *avg distance of all saved routes
 */
 public static double avgDistSaved(Connection connection) throws SQLException {
@@ -478,7 +467,7 @@ public static double avgDistSaved(Connection connection) throws SQLException {
 
     return 0.0;
 }
-  /**
+/**
 *Users whose total miles exceed the average
 */
 public static List<String> aboveAvg(Connection connection) throws SQLException {
@@ -500,5 +489,7 @@ public static List<String> aboveAvg(Connection connection) throws SQLException {
         }
             return list;
     }
+
     // Other methods for updating, deleting, and retrieving data can be added as needed.
 }
+
