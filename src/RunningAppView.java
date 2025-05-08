@@ -1,5 +1,6 @@
 import java.util.List;
-
+import java.util.Map;
+import java.util.HashMap;
 /**
  * This class is a view class that provides methods to display various
  * running-related information.
@@ -24,6 +25,9 @@ public class RunningAppView {
         + "7. [Hard: Sammi Liu, Marcus Robertson] Print the total distance ran on a certain day\n"
         + "8. [Hardest: Sammi Liu, Marcus Robertson] Order the liked routes from shortest to longest\n"
         + "9. [Hardest: Ashley Pupkin] Print total miles ran\n"
+        + "10. [Hardest: Ashley Pupkin, Alan Perez] List all users who have met the achievement goal of 25 miles\n"
+        + "11. [Hard: Ashley Pupkin, Alan Perez] Average distance of all saved routes\n"
+        + "12. [Hardest: Ashley Pupkin] The users whose total run mileage exceed the average\n"
         + "0. Exit\n" + "Enter your choice: ";
 
   }
@@ -70,14 +74,14 @@ public class RunningAppView {
    System.out.printf("%s\n", "-".repeat(100));
   }
 //prints sorted saved routes
-    public static void listSortedRoutes(List<SavedRoutes> sr){//Ashley
-        System.out.printf("%s\n", "-".repeat(100));
-        System.out.printf("%s %20s %20s\n", "Start Location", "End Location", "Saved At");
-        System.out.printf("%s\n", "-".repeat(100));
-        for (SavedRoutes route : sr) {
-            System.out.printf("%s %20s %25s\n", route.getStartLoc(), route.getEndLoc(), route.getSavedAt());
+   public static void listSortedRoutes(List<String> sr){//Ashley
+        System.out.printf("%s\n", "-".repeat(70));
+        System.out.printf("%-20s %-20s %-30s\n", "Start Location", "End Location", "Saved At");
+        System.out.printf("%s\n", "-".repeat(70));
+        for (String route : sr) {
+            System.out.println(route);
         }
-        System.out.printf("%s\n", "-".repeat(100));
+        System.out.printf("%s\n", "-".repeat(70));
     }
 
 /**
@@ -152,15 +156,15 @@ public static void displayTotalMiles(double miles){//Ashley
    * @param friends the list of friends to display
    */
   
-  public static void displayFriends(List<String> friends) { //Sammi & Marcus
-    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+public static void displayFriends(Map<Integer,String> friends) { //Sammi & Marcus & Ashley
+    System.out.printf("%s\n", "-".repeat(70));
     System.out.printf("%-20s\n", "Friend Name");
     
-    for (String friendName : friends) {
-        System.out.printf("%-20s\n", friendName);
+   for (String name : friends.values()) {
+        System.out.printf("%-20s\n", name);
     }
-    
-    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+
+    System.out.printf("%s\n", "-".repeat(70));
   }
 
   /**
@@ -202,4 +206,39 @@ public static void displayTotalMiles(double miles){//Ashley
     }
     System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
   }
+  /**
+*Display users who achieved the 25 mile achievement
+*/
+public static void displayStreak(List<String> list){//Ashley & Alan
+    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+    System.out.println("Users");
+    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+    for(String s: list){
+        System.out.println(s);
+    }
+    System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+}
+/**
+*displays avg distance of saved routes
+*/
+ public static void displayAvgDistanceSaved(double miles){
+        System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+        System.out.println("Distance");
+        System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+        System.out.println(miles);
+        System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+    }
+/**
+*/
+    public static void displayOverAvg(List<String> list){//Ashley
+        System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+        System.out.println("Distance");
+        System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+
+        for (String s: list){
+            System.out.println(s);
+        }
+        System.out.printf("%s\n", "-".repeat(LINE_WIDTH));
+    }
+
 }
