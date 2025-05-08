@@ -55,8 +55,17 @@ public class RunningAppController {
         case 8:
          printTotalDistanceRanOnDay(connection, userId);
          break;
-          case 9:
+        case 9:
          totalMiles(connection);
+         break;
+        case 10:
+         listUserStreak(connection);
+         break;
+        case 11:
+         avgDistance(connection);
+         break;
+        case 12:
+         overAvg(connection);
          break;
         case 0:
           RunningAppView.sayGoodbye();
@@ -127,4 +136,16 @@ public class RunningAppController {
     // Display the total distance
     RunningAppView.displayDistanceRoutes(totalDistances); // Pass the list of distances
   }
+  private static void listUserStreak(Connection connection) throws SQLException{
+    List<String> list = RunningAppDataModel.userStreak(connection);
+    RunningAppView.displayStreak(list);
+}
+private static void avgDistance(Connection connection) throws SQLException{
+        double miles = RunningAppDataModel.avgDistSaved(connection);
+        RunningAppView.displayAvgDistanceSaved(miles);
+    }
+private static void overAvg(Connection connection) throws SQLException{
+        List<String> list = RunningAppDataModel.aboveAvg(connection);
+        RunningAppView.displayOverAvg(list);
+    }
 }
