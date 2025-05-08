@@ -10,7 +10,7 @@ public class Account {
     private String accountNumber;
     private String userID;
     private String accountID;
-    private String friends;
+
 
 /**
  * Constructs a new Account instance with the specified details.
@@ -23,12 +23,12 @@ public class Account {
  */
 
  public Account(final String accountName, final String accountNumber, final String userID,
-                final String accountID, final String friends){
+                final String accountID){
     this.accountName = accountName;
     this.accountNumber = accountNumber;
     this.userID = userID;
     this.accountID = accountID;
-    this.friends = friends;
+   
  }
 
     public String getAccountName() {return accountName;}
@@ -41,15 +41,6 @@ public class Account {
 
     public String getFriends() {return friends;}
 
-    public List<String> getFriendList() {
-        List<String> friendList = new ArrayList<>();
-        if (friends != null && !friends.isEmpty()) {
-            String[] friendArray = friends.split(",");
-            for (String friend : friendArray) {
-                friendList.add(friend.trim());
-            }
-        }
-        return friendList;
-    }
+   
 
 }
