@@ -3,7 +3,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
-
+import java.util.Map;
+import java.util.HashMap;
 /**
  * The RunningAppController class handles the user interactions and controls the flow of the running
  * motivation application.
@@ -85,7 +86,7 @@ public class RunningAppController {
   }
 
   private static void listFriendsOfUser(Connection connection, String accountID) throws SQLException {
-    List<String> friends = RunningAppDataModel.getFriends(connection, accountID);
+    Map<Integer,String> friends = RunningAppDataModel.getFriends(connection, accountID);
     RunningAppView.displayFriends(friends);
   }
   private static void listAchievements(Connection connection, String acctID) throws SQLException{
@@ -97,24 +98,28 @@ public class RunningAppController {
    RunningAppView.displayTotalMiles(miles);
  }
   private static void listSortedSavedRoutes(Connection connection) throws SQLException{
-        List<SavedRoutes> sr = RunningAppDataModel.sortedSavedRoutes(connection);
+        List<String> sr = RunningAppDataModel.sortedSavedRoutes(connection);
         RunningAppView.listSortedRoutes(sr);
     }
-  private static void listRoutesEndingAtLocation(Connection connection) throws SQLException {
+
+   private static void listRoutesEndingAtLocation(Connection connection) throws SQLException {
     System.out.print("Enter the location where the routes end: ");
+    in.nextLine();
     String location = in.nextLine().trim();
     //get routes that end at the specified location
     List<Routes> routes = RunningAppDataModel.getRoutesEndingAtLocation(connection, location);
     RunningAppView.displayEndingRoutes(routes);  // Display the routes that end at the location
   }
-
+ 
   private static void listRoutesStartingAtLocation(Connection connection) throws SQLException {
     System.out.print("Enter the location where the routes start: ");
+    in.nextLine();
     String location = in.nextLine().trim();
     //get routes that start at the specified location
     List<Routes> routes = RunningAppDataModel.getRoutesStartingAtLocation(connection, location);
     RunningAppView.displayStartingRoutes(routes);  // Display the routes that start at the location
   }
+
 
   private static void orderRoutesByDistance(Connection connection, String accID) throws SQLException {
     List<Routes> routes = RunningAppDataModel.getRoutes(connection, accID);
