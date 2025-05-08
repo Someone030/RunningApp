@@ -30,7 +30,6 @@ public class RunningAppController {
     do {
       System.out.print(RunningAppView.getMenuText());
       action = in.nextInt();
-      in.nextLine();
       switch (action) {
         case 1:
           listAllRoutes(connection, userId);
@@ -76,11 +75,7 @@ public class RunningAppController {
       }
     } while (action != 0);
   }
-  
-  //note to myself cz I'm getting confused :D
-  //get all routes would be in the running app data model file while the display routes is in the view file
-  
-  private static void listAllRoutes(Connection connection, String accID) throws SQLException {
+private static void listAllRoutes(Connection connection, String accID) throws SQLException {
     List<Routes> routes = RunningAppDataModel.getRoutes(connection, accID);
     RunningAppView.displayRoutes(routes);
   }
@@ -89,11 +84,11 @@ public class RunningAppController {
     Map<Integer,String> friends = RunningAppDataModel.getFriends(connection, accountID);
     RunningAppView.displayFriends(friends);
   }
-  private static void listAchievements(Connection connection, String acctID) throws SQLException{
+private static void listAchievements(Connection connection, String acctID) throws SQLException{
     List<Achievements> a = RunningAppDataModel.getAllAchievements(connection);
     RunningAppView.printAllAchievements(a);
   }
-  private static void totalMiles(Connection connection) throws SQLException{
+ private static void totalMiles(Connection connection) throws SQLException{
    double miles = RunningAppDataModel.totalMilesRan(connection);
    RunningAppView.displayTotalMiles(miles);
  }
@@ -110,7 +105,6 @@ public class RunningAppController {
     List<Routes> routes = RunningAppDataModel.getRoutesEndingAtLocation(connection, location);
     RunningAppView.displayEndingRoutes(routes);  // Display the routes that end at the location
   }
- 
   private static void listRoutesStartingAtLocation(Connection connection) throws SQLException {
     System.out.print("Enter the location where the routes start: ");
     in.nextLine();
@@ -119,7 +113,6 @@ public class RunningAppController {
     List<Routes> routes = RunningAppDataModel.getRoutesStartingAtLocation(connection, location);
     RunningAppView.displayStartingRoutes(routes);  // Display the routes that start at the location
   }
-
 
   private static void orderRoutesByDistance(Connection connection, String accID) throws SQLException {
     List<Routes> routes = RunningAppDataModel.getRoutes(connection, accID);
@@ -130,8 +123,7 @@ public class RunningAppController {
     // Display the sorted list of routes
     RunningAppView.displayOrderedRoutes(routes);
   }
-
-  private static void printTotalDistanceRanOnDay(Connection connection, String accoID) throws SQLException {
+private static void printTotalDistanceRanOnDay(Connection connection, String accoID) throws SQLException {
     System.out.print("Enter the date (YYYY-MM-DD) to get total distance: ");
     String date = in.next();
     
@@ -141,7 +133,8 @@ public class RunningAppController {
     // Display the total distance
     RunningAppView.displayDistanceRoutes(totalDistances); // Pass the list of distances
   }
-  private static void listUserStreak(Connection connection) throws SQLException{
+
+private static void listUserStreak(Connection connection) throws SQLException {   
     List<String> list = RunningAppDataModel.userStreak(connection);
     RunningAppView.displayStreak(list);
 }
@@ -154,3 +147,4 @@ private static void overAvg(Connection connection) throws SQLException{
         RunningAppView.displayOverAvg(list);
     }
 }
+
